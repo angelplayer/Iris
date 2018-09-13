@@ -25,7 +25,10 @@ import { UserService } from "@/services/hyouka-api";
 
 @Component({})
 export default class Login extends Vue {
-  constructor(private username: string, password: string) {
+  username: string = "";
+  password: string = "";
+
+  constructor() {
     super();
   }
 
