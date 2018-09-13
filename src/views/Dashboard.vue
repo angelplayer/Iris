@@ -4,7 +4,8 @@
 			<admin-header link-to="/home" @toggle-nav="toggleNavbar()" @toggle-topbar="toggleTopbar()"></admin-header>
 			<app-header></app-header>
 		</div>
-			<app-sidebar :links="navs"></app-sidebar> 	
+			<app-sidebar :links="navs"></app-sidebar> 
+      <router-view></router-view>	
 	</div>
 </template>
 
@@ -24,27 +25,27 @@ import "@/assets/css/ready.css";
 import "@/assets/css/demo.css";
 import { Ilink } from "@/types/layout";
 import { AppState } from "@/types/state";
+import { LOGIN } from "@/store/constant";
+import { LoginData } from "@/services/hyouka-api";
+import GenreView from "@/views/GenreView.vue";
 
 @Component({
   components: { AppSidebar, AppHeader, AdminHeader }
 })
 export default class Dashboard extends Vue {
-  @Getter hasError: boolean;
-
-  @Action("login") login: any;
-
   navs: Array<Ilink>;
   isNavOpen: boolean = false;
   isTopbarOpen: boolean = false;
 
+  @Getter hasError: boolean;
+
   constructor() {
     super();
-    this.navs = [{ url: "/admin", name: "Dashboard", icon: "la la-dashboard" }];
-  }
-
-  mounted() {
-    alert(this.hasError);
-    this.login({});
+    this.navs = [
+      { url: "/admin", name: "Dashboard", icon: "la la-dashboard" },
+      { url: "/create", name: "create", icon: "la la-edit" },
+      { url: "/genre", name: "genre", icon: "la la-group" }
+    ];
   }
 
   toggleNavbar(): void {

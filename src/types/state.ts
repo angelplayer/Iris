@@ -1,6 +1,7 @@
-import { IUser } from '@/services/hyouka-api'
+import { IUser, IGenre } from '@/services/hyouka-api'
 
 export interface AppState {
     user?: IUser,
-    error: boolean
+    error: boolean,
+    genres: Array<IGenre>
 }

@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Dashboard from './views/Dashboard.vue'
+import Auth from "./views/Auth.vue";
+import GenreView from '@/views/GenreView.vue'
 
 Vue.use(Router);
 
@@ -23,14 +25,25 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('./views/Auth.vue')
+      path: '/user',
+      name: 'user',
+      component: Auth
+    },
+    {
+      path: '/create',
+      name: 'create',
     },
     {
       path: '/admin',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      children: [
+        {
+          path: 'genre',
+          name: 'genre',
+          component: GenreView
+        }
+      ]
     }
   ],
 });

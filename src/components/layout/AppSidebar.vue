@@ -8,7 +8,7 @@
                 <div class="info">
                     <a @click.prevent="toggleShow()" class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Hizrian
+                            {{username}}
                             <span class="user-level">Administrator</span>
                             <span class="caret"></span>
                         </span>
@@ -38,11 +38,11 @@
             </div>
             <ul class="nav">
                 <li class="nav-item active" v-for="(item, index) in links" :key="index">
-                     <a :href="item.url">
+                     <router-link :to="item.url">
                         <i :class="item.icon"></i>
                         <p>{{item.name}}</p>
                         <span class="badge badge-count">5</span>
-                    </a>
+                     </router-link>
                 </li>
                 <li class="nav-item">
                     <a href="components.html">
@@ -96,11 +96,14 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { Ilink } from "@/types/layout.ts";
+import { Getter } from "vuex-class";
 
 @Component
 export default class AppSidebar extends Vue {
   @Prop({ required: false })
   links?: Array<Ilink>;
+
+  @Getter username: string;
 
   isProfileShow: boolean = false;
 
