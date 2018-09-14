@@ -1,12 +1,13 @@
 import { AppState } from '@/types/state'
-import { ActionTree, MutationTree, GetterTree, ActionContext } from 'vuex'
+import { ActionTree, MutationTree, GetterTree, ActionContext, Module } from 'vuex'
 import { User, UserService, Command2, ILoginData, Command3, Genre, Command6, GenresEnvelope, GenresService, } from '@/services/hyouka-api';
 import { LOGIN, REGISTER, FETCH_GENRES, ADD_GENRE } from '@/store/constant'
 
-export const appState: AppState = {
+
+export const state: AppState = {
   user: {},
   error: true,
-  genres: []
+  genres: [{ genreId: 1, name: 'Girl' }]
 }
 
 export const getters: GetterTree<AppState, any> = {
@@ -50,4 +51,11 @@ export const actions: ActionTree<AppState, any> = {
     })
   }
 }
+
+
+
+export const app: Module<AppState, any> = {
+  namespaced: false, state: state, getters: getters, actions: actions, mutations: mutations
+};
+
 

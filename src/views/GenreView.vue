@@ -42,8 +42,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { IGenre, GenresService, Command6 } from "@/services/hyouka-api";
-import { Getter } from "vuex-class";
+import { Getter, Action } from "vuex-class";
 import { ADD_GENRE, FETCH_GENRES } from "@/store/constant";
+import { ActionTree } from "vuex";
+import { AppState } from "@/types/state";
 
 @Component({})
 export default class GenreView extends Vue {
@@ -51,12 +53,14 @@ export default class GenreView extends Vue {
   newGenre: string = "";
 
   mounted() {
-    this.$store.dispatch(FETCH_GENRES);
+    this.$store.dispatch(FETCH_GENRES, null, { root: true });
   }
 
   onEnter(event: KeyboardEvent) {
     if (event.keyCode == 13 && this.newGenre != "") {
-      this.$store.dispatch(ADD_GENRE, new Command6({ name: this.newGenre }));
+      this.$store
+        .dispatch(ADD_GENRE, new Command6({ name: this.newGenre }))
+        .then(() => (this.newGenre = ""));
     }
   }
 }

@@ -37,8 +37,6 @@ export default class Dashboard extends Vue {
   isNavOpen: boolean = false;
   isTopbarOpen: boolean = false;
 
-  @Getter hasError: boolean;
-
   constructor() {
     super();
     this.navs = [

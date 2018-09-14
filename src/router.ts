@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Dashboard from './views/Dashboard.vue'
 import Auth from "./views/Auth.vue";
 import GenreView from '@/views/GenreView.vue'
+import MainView from '@/views/MainView.vue'
 
 Vue.use(Router);
 
@@ -38,6 +39,10 @@ export default new Router({
       name: 'dashboard',
       component: Dashboard,
       children: [
+        {
+          path: '',
+          component: MainView
+        },
         {
           path: 'genre',
           name: 'genre',

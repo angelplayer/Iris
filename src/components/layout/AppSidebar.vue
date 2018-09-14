@@ -103,8 +103,6 @@ export default class AppSidebar extends Vue {
   @Prop({ required: false })
   links?: Array<Ilink>;
 
-  @Getter username: string;
-
   isProfileShow: boolean = false;
 
   toggleShow(): void {
