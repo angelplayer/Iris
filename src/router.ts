@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard.vue'
 import Auth from "./views/Auth.vue";
 import GenreView from '@/views/GenreView.vue'
 import MainView from '@/views/MainView.vue'
+import Creator from '@/views/Creator.vue'
 
 Vue.use(Router);
 
@@ -31,10 +32,6 @@ export default new Router({
       component: Auth
     },
     {
-      path: '/create',
-      name: 'create',
-    },
-    {
       path: '/admin',
       name: 'dashboard',
       component: Dashboard,
@@ -47,6 +44,11 @@ export default new Router({
           path: 'genre',
           name: 'genre',
           component: GenreView
+        },
+        {
+          path: 'create',
+          name: 'create',
+          component: Creator
         }
       ]
     }

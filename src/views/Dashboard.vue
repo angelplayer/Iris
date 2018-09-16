@@ -25,7 +25,7 @@ import "@/assets/css/ready.css";
 import "@/assets/css/demo.css";
 import { Ilink } from "@/types/layout";
 import { AppState } from "@/types/state";
-import { LOGIN } from "@/store/constant";
+import { LOGIN, FETCH_GENRES } from "@/store/constant";
 import { LoginData } from "@/services/hyouka-api";
 import GenreView from "@/views/GenreView.vue";
 
@@ -41,9 +41,13 @@ export default class Dashboard extends Vue {
     super();
     this.navs = [
       { url: "/admin", name: "Dashboard", icon: "la la-dashboard" },
-      { url: "/create", name: "create", icon: "la la-edit" },
-      { url: "/genre", name: "genre", icon: "la la-group" }
+      { url: "/admin/create", name: "create", icon: "la la-edit" },
+      { url: "/admin/genre", name: "genre", icon: "la la-group" }
     ];
+  }
+
+  mounted() {
+    this.$store.dispatch(FETCH_GENRES, null, { root: true });
   }
 
   toggleNavbar(): void {

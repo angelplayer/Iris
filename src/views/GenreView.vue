@@ -52,10 +52,6 @@ export default class GenreView extends Vue {
   @Getter("genres") genres: Array<IGenre>;
   newGenre: string = "";
 
-  mounted() {
-    this.$store.dispatch(FETCH_GENRES, null, { root: true });
-  }
-
   onEnter(event: KeyboardEvent) {
     if (event.keyCode == 13 && this.newGenre != "") {
       this.$store

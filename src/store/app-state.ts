@@ -7,7 +7,7 @@ import { LOGIN, REGISTER, FETCH_GENRES, ADD_GENRE } from '@/store/constant'
 export const state: AppState = {
   user: {},
   error: true,
-  genres: [{ genreId: 1, name: 'Girl' }]
+  genres: []
 }
 
 export const getters: GetterTree<AppState, any> = {
