@@ -51,7 +51,10 @@ export default class MovieList extends Vue {
 
   selected(index: number) {
     this.selectedInex = this.selectedInex == index ? -1 : index;
-    this.$emit("selected", this.list[this.selectedInex]);
+    this.$emit(
+      "selected",
+      this.selectedInex != -1 ? this.list[this.selectedInex] : null
+    );
   }
 }
 </script>

@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="card-action">
-      <button @click="create()" class="btn btn-success">Create</button>
+      <button @click="submit()" class="btn btn-success">Save change</button>
       <button @click="reset()" class="mx-5 btn btn-danger">Cancel</button>
     </div>
   </div>
@@ -58,17 +58,8 @@ export default class MovieEditor extends Vue {
   @Prop({ required: true })
   movie: Movie;
 
-  create(): void {
-    let data = new MovieData({
-      title: this.movie.title,
-      description: this.movie.description,
-      realeaseDate: this.movie.releaseDate,
-      genreList: this.genres.map(x => x.genreId),
-      image: this.movie.image
-    });
-    this.$store.dispatch(CREATE_MOVIE, data).then((envelope: MovieEnvelope) => {
-      this.$router.push({ name: "main-view" }); // TODO: navigate to view movie page
-    });
+  submit(): void {
+    this.$emit("click");
   }
 }
 </script>

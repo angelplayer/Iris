@@ -47,7 +47,7 @@ export default new Router({
           component: GenreView
         },
         {
-          path: 'create',
+          path: 'create/:id?',
           name: 'create',
           component: Creator
         }

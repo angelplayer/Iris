@@ -26,6 +26,6 @@ import { IMovie } from "@/services/hyouka-api";
 
 @Component({})
 export default class MovieCard extends Vue {
-  @Prop() movie: IMovie;
+  @Prop({required: true}) movie: IMovie;
 }
 </script>
