@@ -7,13 +7,15 @@ import { LOGIN, REGISTER, FETCH_GENRES, ADD_GENRE } from '@/store/constant'
 export const state: AppState = {
   user: {},
   error: true,
-  genres: []
+  genres: [],
+  isLoading: true
 }
 
 export const getters: GetterTree<AppState, any> = {
   hasError: state => state.error,
   username: state => state.user.username,
-  genres: state => state.genres
+  genres: state => state.genres,
+  loading: state => state.isLoading
 }
 
 export const mutations: MutationTree<AppState> = {

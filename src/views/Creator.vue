@@ -4,6 +4,9 @@
       <div class="container-fluid">
         <h4 class="page-title">Creator</h4>
         <div class="row">
+          <div class=""></div>
+        </div>
+        <div class="row">
           <div class="col-md-4">
             <movie-card :movie="movie"></movie-card>
           </div>
@@ -46,7 +49,7 @@ export default class Creator extends Vue {
   @Getter("genres") genres: Array<IGenre>;
 
   movie: Movie = new Movie();
-  isEditing: boolean = true;
+  isEditing: boolean = false;
 
   created(): void {
     let id: string = this.$route.params.id;
@@ -69,7 +72,6 @@ export default class Creator extends Vue {
       image: this.movie.image
     });
     this.$store.dispatch(CREATE_MOVIE, data).then((envelope: MovieEnvelope) => {
-      alert("create");
       this.$router.push({ name: "main-view" }); // TODO: navigate to view movie page
     });
   }

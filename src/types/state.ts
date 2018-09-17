@@ -4,7 +4,8 @@ import { IMovie } from '@/services/hyouka-api'
 export interface AppState {
     user?: IUser,
     error: boolean,
-    genres: Array<IGenre>
+    genres: Array<IGenre>,
+    isLoading: boolean
 }
 
 export interface MoviesState {

@@ -5,21 +5,29 @@
     <p class="card-category">Recent movie</p>
 </div>
 <div class="card-body">
-    <table class="table table-head-bg-success table-striped table-hover">
+    <table class="table table-head-bg-danger table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Anime</th>
                 <th scope="col">Episode</th>
                 <th scope="col">Aired</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" :class="{'bg-primary text-white': selectedRow == index}">
+            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" class="touch" :class="{'bg-info': selectedRow == index}">
                 <td>{{item.movieId}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.episodeCount}}</td>
                 <td>{{item.releaseDate | formatDate}}</td>
+                <td>
+                    <button @click="edit(index)" class="btn btn-link btn-sm btn-simple-dark"><i class="la la-edit"></i></button>
+                </td>
+                <td>
+                    <button @click="remove(index)" class="btn btn-link btn-sm btn-simple-danger"><i class="la la-times"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -56,6 +64,21 @@ export default class MovieList extends Vue {
       this.selectedInex != -1 ? this.list[this.selectedInex] : null
     );
   }
+
+  remove(index: number): void {
+    this.$emit("remove", this.list[index]);
+  }
+
+  edit(index: number): void {
+    this.$emit("edit", this.list[index]);
+  }
 }
 </script>
+
+
+<style scoped>
+.touch {
+  cursor: pointer;
+}
+</style>
 

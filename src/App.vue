@@ -1,14 +1,25 @@
 <template>
-    <router-view/>
+    <div>
+      <router-view/>
+      <loading :loading="isLoading"/>
+    </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
 import { MoviesService } from "@/services/hyouka-api";
+import Loading from "@/components/layout/Loading.vue";
+import { State, Getter } from "vuex-class";
 
-@Component
-export default class App extends Vue {}
+@Component({
+  components: {
+    Loading
+  }
+})
+export default class App extends Vue {
+  @Getter("loading") isLoading: boolean;
+}
 </script>
 
 

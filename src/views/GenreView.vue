@@ -21,7 +21,7 @@
                       <div class="form-group form-show-notify row">
                         <div class="col-md-12 mx-auto">
                           <p class="demo">
-                            <button v-for="(genre, index) in genres" :key="index" class="btn btn-primary mx-1">
+                            <button v-for="(genre, index) in genres" :key="index" :class="'btn mx-1 btn-'+ randomStyle()">
                               {{genre.genreId}}.{{genre.name}}
                               <i @click="remove(genre)" class="la la-close"></i>
                             </button>										    </p>
@@ -41,11 +41,13 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import {} from "vue-property-decorator";
 import { IGenre, GenresService, Command6 } from "@/services/hyouka-api";
 import { Getter, Action } from "vuex-class";
 import { ADD_GENRE, FETCH_GENRES } from "@/store/constant";
 import { ActionTree } from "vuex";
 import { AppState } from "@/types/state";
+import helper from "@/types/StyleHelper";
 
 @Component({})
 export default class GenreView extends Vue {
@@ -58,6 +60,9 @@ export default class GenreView extends Vue {
         .dispatch(ADD_GENRE, new Command6({ name: this.newGenre }))
         .then(() => (this.newGenre = ""));
     }
+  }
+  randomStyle() {
+    return helper.random();
   }
 }
 </script>

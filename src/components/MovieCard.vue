@@ -7,7 +7,7 @@
   <img class="card-img-top" src="../../public/img/auth.jpg" alt="poster">
   <div class="card-body">
     <p class="card-text">{{movie.description}}</p>
-    <span v-for="(item, index) in movie.genreList" :key="index" class="badge badge-default">
+    <span v-for="(item, index) in movie.genreList" :key="index" :class="'badge badge-'+randomStyle()">
       {{item}}
     </span>
   </div>
@@ -23,9 +23,15 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { IMovie } from "@/services/hyouka-api";
+import helper from "@/types/StyleHelper";
 
 @Component({})
 export default class MovieCard extends Vue {
-  @Prop({required: true}) movie: IMovie;
+  @Prop({ required: true })
+  movie: IMovie;
+
+  randomStyle(): string {
+    return helper.random();
+  }
 }
 </script>
