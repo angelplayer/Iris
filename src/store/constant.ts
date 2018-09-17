@@ -5,3 +5,4 @@ export const FETCH_GENRES = 'getGenre'
 
 
 export const FETCH_MOVIES = 'getMovies'
+export const CREATE_MOVIE = 'createMovie'

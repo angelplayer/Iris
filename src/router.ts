@@ -38,6 +38,7 @@ export default new Router({
       children: [
         {
           path: '',
+          name: 'main-view',
           component: MainView
         },
         {

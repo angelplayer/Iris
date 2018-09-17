@@ -37,8 +37,8 @@
       </div>
     </div>
     <div class="card-action">
-      <button class="btn btn-success">Submit</button>
-      <button class="btn btn-danger">Cancel</button>
+      <button @click="create()" class="btn btn-success">Create</button>
+      <button @click="reset()" class="mx-5 btn btn-danger">Cancel</button>
     </div>
   </div>
 </template>
@@ -48,13 +48,27 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { IMovie, IGenre } from "@/services/hyouka-api";
+import { Movie, IGenre, MovieData, MovieEnvelope } from "@/services/hyouka-api";
 import { Getter } from "vuex-class";
+import { CREATE_MOVIE } from "@/store/constant";
 
 @Component
 export default class MovieEditor extends Vue {
   @Getter("genres") genres: Array<IGenre>;
   @Prop({ required: true })
-  movie: IMovie;
+  movie: Movie;
+
+  create(): void {
+    let data = new MovieData({
+      title: this.movie.title,
+      description: this.movie.description,
+      realeaseDate: this.movie.releaseDate,
+      genreList: this.genres.map(x => x.genreId),
+      image: this.movie.image
+    });
+    this.$store.dispatch(CREATE_MOVIE, data).then((envelope: MovieEnvelope) => {
+      this.$router.push({ name: "main-view" }); // TODO: navigate to view movie page
+    });
+  }
 }
 </script>

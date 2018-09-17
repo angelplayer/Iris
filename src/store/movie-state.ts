@@ -1,7 +1,7 @@
 import { MoviesState } from '@/types/state';
-import { Movie, Command6, Command4, MoviesService } from '@/services/hyouka-api';
+import { Movie, Command6, Command4, MoviesService, Command5, MovieData, MovieEnvelope } from '@/services/hyouka-api';
 import { MutationTree, ActionTree, GetterTree, ActionContext, Module } from 'vuex';
-import { FETCH_MOVIES } from '@/store/constant';
+import { FETCH_MOVIES, CREATE_MOVIE } from '@/store/constant';
 
 export const state: MoviesState = {
     items: [], movie: new Movie()
@@ -24,6 +24,11 @@ export const actions: ActionTree<MoviesState, any> = {
         new MoviesService().get().then((envelope) => {
             store.commit('storeMovies', envelope.movies);
         })
+    },
+
+    [CREATE_MOVIE](store: ActionContext<MoviesState, any>, data: MovieData): Promise<MovieEnvelope> {
+
+        return new MoviesService().create(new Command4({ movie: data }));
     }
 }
 

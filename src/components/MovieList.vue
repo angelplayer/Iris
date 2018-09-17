@@ -15,11 +15,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in movies" :key="index">
+            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" :class="{'bg-primary text-white': selectedRow == index}">
                 <td>{{item.movieId}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.episodeCount}}</td>
-                <td>{{item.releaseDate}}</td>
+                <td>{{item.releaseDate | formatDate}}</td>
             </tr>
         </tbody>
     </table>
@@ -33,13 +33,25 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { IMovie } from "@/services/hyouka-api";
+import { EventEmitter } from "events";
 
 @Component({})
 export default class MovieList extends Vue {
   @Prop() list: Array<IMovie>;
 
+  selectedInex: number = -1;
+
   get movies() {
     return this.list;
+  }
+
+  get selectedRow() {
+    return this.selectedInex;
+  }
+
+  selected(index: number) {
+    this.selectedInex = this.selectedInex == index ? -1 : index;
+    this.$emit("selected", this.list[this.selectedInex]);
   }
 }
 </script>

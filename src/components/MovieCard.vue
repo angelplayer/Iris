@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
     <h4 class="card-title">{{movie.title}}</h4>
-    <p class="card-category">{{movie.releaseDate}}</p>
+    <p class="card-category">{{movie.releaseDate | formatDate}}</p>
     </div>
   <img class="card-img-top" src="../../public/img/auth.jpg" alt="poster">
   <div class="card-body">
