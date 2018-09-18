@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <movie-list :list="movies" @selected="onSelected" @edit="edit" @remove="remove"></movie-list>
-                        <episode-list></episode-list>
+                        <episode-list :list="episodeList"></episode-list>
                     </div>
                     <div class="col-md-4">
                       <transition enter-active-class="animated shake" duration="300" mode="out-in">
@@ -26,7 +26,7 @@ import Component from "vue-class-component";
 import MovieList from "@/components/MovieList.vue";
 import MovieCard from "@/components/MovieCard.vue";
 import { State, Getter } from "vuex-class";
-import { IMovie, Movie, MoviesService } from "@/services/hyouka-api";
+import { IMovie, Movie, MoviesService, IEpisode } from "@/services/hyouka-api";
 import { FETCH_MOVIES, DELETE_MOVIE } from "@/store/constant";
 import EpisodeList from "@/components/EpisodeList.vue";
 
@@ -39,6 +39,7 @@ import EpisodeList from "@/components/EpisodeList.vue";
 })
 export default class MainView extends Vue {
   @Getter("movieItems") movies: Array<IMovie>;
+  @Getter("episode") getEpisode: Function;
 
   selectedMovie: IMovie = null;
 
@@ -62,6 +63,12 @@ export default class MainView extends Vue {
 
   remove(movie: Movie): void {
     this.$store.dispatch(DELETE_MOVIE, movie.movieId);
+  }
+
+  get episodeList() {
+    return this.selectedMovie
+      ? this.getEpisode(this.selectedMovie.movieId)
+      : [];
   }
 }
 </script>

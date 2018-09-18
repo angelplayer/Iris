@@ -22,6 +22,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td  class="td-actions" colspan="3">
+                                <div @click="isAdding = !isAdding" v-if="!isAdding" class="demo-icon mb-0 text-center mouse">
+                                    <h5 class="mb-0"><i class="la la-pencil"></i> Add new episode</h5>
+                                </div>
+                                <div v-else class="form-inline bg-light">
+                                    <label @click="isAdding = !isAdding" class="demo-icon mr-auto mouse">
+                                        <div class="icon-preview mr-0"><i class="la la la-times"></i></div>
+                                    </label>
+                                    <input placeholder="No" type="text mx-1" class="form-control mx-1">
+                                    <input placeholder="Episdoe name..." type="text mx-1" class="form-control">
+                                    <label class="demo-icon px-1 mx-1 mouse">
+                                        <div class="icon-preview ml-1"><i class="la la-film"></i></div>
+                                    </label>
+                                    <p  class="form-control-static"></p>
+                                    <label class="demo-icon ml-auto mouse">
+                                        <div class="icon-preview"><i class="la la la-plane"></i></div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
                         <tr v-for="(item, index) in episodes" :key="index">
                             <td>
                                 <div class="form-check">
@@ -61,22 +82,20 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { IEpisode } from "@/services/hyouka-api";
+import { Prop } from "vue-property-decorator";
 
 @Component
 export default class EpisodeList extends Vue {
+  @Prop({ required: true })
   episodes: Array<IEpisode>;
 
-  constructor() {
-    super();
-    this.episodes = [
-      {
-        episodeId: 1,
-        name: "The beginning",
-        number: "1",
-        file: "abc.mp4",
-        movieId: 1
-      }
-    ];
-  }
+  isAdding: boolean = false;
 }
 </script>
+
+<style>
+.mouse {
+  cursor: pointer;
+}
+</style>
+

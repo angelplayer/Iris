@@ -1,4 +1,4 @@
-import { IUser, IGenre } from '@/services/hyouka-api'
+import { IUser, IGenre, IEpisode } from '@/services/hyouka-api'
 import { IMovie } from '@/services/hyouka-api'
 
 export interface AppState {
@@ -11,4 +11,8 @@ export interface AppState {
 export interface MoviesState {
     items: Array<IMovie>,
     movie?: IMovie
+}
+
+export interface EpisodeState {
+    episodes: Array<IEpisode>
 }

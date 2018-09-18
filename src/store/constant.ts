@@ -8,3 +8,6 @@ export const FETCH_MOVIES = 'getMovies'
 export const CREATE_MOVIE = 'createMovie'
 export const UPDATE_MOVIE = 'updateMovie'
 export const DELETE_MOVIE = "deleteMovie"
+
+export const CREATE_EPISODE = 'postEpisode'
+export const FETCH_EPISODES = 'getEpisodeByMovieId'
