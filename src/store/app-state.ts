@@ -6,9 +6,9 @@ import { LOGIN, REGISTER, FETCH_GENRES, ADD_GENRE } from '@/store/constant'
 
 export const state: AppState = {
   user: {},
-  error: true,
+  error: false,
   genres: [],
-  isLoading: true
+  isLoading: false
 }
 
 export const getters: GetterTree<AppState, any> = {
@@ -19,6 +19,9 @@ export const getters: GetterTree<AppState, any> = {
 }
 
 export const mutations: MutationTree<AppState> = {
+  loading(state, payload: boolean) {
+    state.isLoading = payload;
+  },
   storeUser(state, payload: User) {
     state.error = false;
     state.user = payload;
@@ -57,7 +60,7 @@ export const actions: ActionTree<AppState, any> = {
 
 
 export const app: Module<AppState, any> = {
-  namespaced: false, state: state, getters: getters, actions: actions, mutations: mutations
+  state: state, getters: getters, actions: actions, mutations: mutations
 };
 
 

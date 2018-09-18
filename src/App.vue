@@ -1,7 +1,7 @@
 <template>
     <div>
       <router-view/>
-      <loading :loading="isLoading"/>
+      <loading :loading="app.isLoading"/>
     </div>
 </template>
 
@@ -11,6 +11,7 @@ import Component from "vue-class-component";
 import { MoviesService } from "@/services/hyouka-api";
 import Loading from "@/components/layout/Loading.vue";
 import { State, Getter } from "vuex-class";
+import { AppState } from "@/types/state";
 
 @Component({
   components: {
@@ -18,7 +19,7 @@ import { State, Getter } from "vuex-class";
   }
 })
 export default class App extends Vue {
-  @Getter("loading") isLoading: boolean;
+  @State("app") app: AppState;
 }
 </script>
 

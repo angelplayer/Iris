@@ -62,6 +62,7 @@ export default class Creator extends Vue {
   }
 
   create(): void {
+    this.$store.state.app.isLoading = true;
     let data = new MovieData({
       title: this.movie.title,
       description: this.movie.description,
@@ -72,6 +73,7 @@ export default class Creator extends Vue {
       image: this.movie.image
     });
     this.$store.dispatch(CREATE_MOVIE, data).then((envelope: MovieEnvelope) => {
+      this.$store.state.app.isLoading = false;
       this.$router.push({ name: "main-view" }); // TODO: navigate to view movie page
     });
   }
