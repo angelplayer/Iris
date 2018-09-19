@@ -31,19 +31,19 @@
                                     <label @click="isAdding = !isAdding" class="demo-icon mr-auto mouse">
                                         <div class="icon-preview mr-0"><i class="la la la-times"></i></div>
                                     </label>
-                                    <input placeholder="No" type="text mx-1" class="form-control mx-1">
-                                    <input placeholder="Episdoe name..." type="text mx-1" class="form-control">
+                                    <input v-model="newEpisode.number" placeholder="No" type="text mx-1" class="form-control mx-1">
+                                    <input v-model="newEpisode.name" placeholder="Episdoe name..." type="text mx-1" class="form-control">
                                     <label class="demo-icon px-1 mx-1 mouse">
-                                        <div class="icon-preview ml-1"><i class="la la-film"></i></div>
+                                        <div @click="chooseFile()" :class="['icon-preview',newEpisode.file? 'text-info':'']" ><i class="la la-film"></i></div>
                                     </label>
                                     <p  class="form-control-static"></p>
                                     <label class="demo-icon ml-auto mouse">
-                                        <div class="icon-preview"><i class="la la la-plane"></i></div>
+                                        <div @click="upload()" class="icon-preview"><i class="la la la-plane"></i></div>
                                     </label>
                                 </div>
                             </td>
                         </tr>
-                        <tr v-for="(item, index) in episodes" :key="index">
+                        <tr v-for="(item, index) in list" :key="index">
                             <td>
                                 <div class="form-check">
                                     <label class="form-check-label">
@@ -81,15 +81,38 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { IEpisode } from "@/services/hyouka-api";
+import {
+  IEpisode,
+  Episode,
+  EpisodesService,
+  EpisodeData,
+  Command3,
+  Command
+} from "@/services/hyouka-api";
 import { Prop } from "vue-property-decorator";
+import { CREATE_EPISODE } from "@/store/constant";
 
 @Component
 export default class EpisodeList extends Vue {
   @Prop({ required: true })
-  episodes: Array<IEpisode>;
+  list: Array<IEpisode>;
+
+  @Prop({ required: true })
+  movieId: number;
 
   isAdding: boolean = false;
+  newEpisode: EpisodeData = new EpisodeData();
+
+  chooseFile(): void {
+    this.newEpisode.file = "abc.mp4";
+  }
+
+  upload(): void {
+    this.$store.dispatch(CREATE_EPISODE, {
+      episode: this.newEpisode,
+      movieId: this.movieId
+    });
+  }
 }
 </script>
 

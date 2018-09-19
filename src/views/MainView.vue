@@ -5,12 +5,12 @@
                 <h4 class="page-title">Dashboard</h4>
                 <div class="row">
                     <div class="col-md-8">
-                        <movie-list :list="movies" @selected="onSelected" @edit="edit" @remove="remove"></movie-list>
-                        <episode-list :list="episodeList"></episode-list>
+                        <movie-list :list="movies"  @selected="onSelected" @edit="edit" @remove="remove"></movie-list>
+                        <episode-list v-if="selectedMovie" :movie-id="selectedMovie.movieId" :list="episodeList"></episode-list>
                     </div>
                     <div class="col-md-4">
-                      <transition enter-active-class="animated shake" duration="300" mode="out-in">
-                        <movie-card :movie="selectedMovie"></movie-card>
+                      <transition enter-active-class="animated shake" duration="300" mode="in-out">
+                        <movie-card v-if="selectedMovie" :movie="selectedMovie"></movie-card>
                       </transition>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ import EpisodeList from "@/components/EpisodeList.vue";
 })
 export default class MainView extends Vue {
   @Getter("movieItems") movies: Array<IMovie>;
-  @Getter("episode") getEpisode: Function;
+  @Getter("episodes") allEpisode: Array<IEpisode>;
 
   selectedMovie: IMovie = null;
 
@@ -65,10 +65,10 @@ export default class MainView extends Vue {
     this.$store.dispatch(DELETE_MOVIE, movie.movieId);
   }
 
-  get episodeList() {
+  get episodeList(): Array<IEpisode> {
     return this.selectedMovie
-      ? this.getEpisode(this.selectedMovie.movieId)
-      : [];
+      ? this.allEpisode.filter(x => x.movieId == this.selectedMovie.movieId)
+      : null;
   }
 }
 </script>

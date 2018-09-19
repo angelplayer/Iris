@@ -34,9 +34,7 @@ export const actions: ActionTree<EpisodeState, any> = {
 }
 
 export const getters: GetterTree<EpisodeState, any> = {
-    episodes(state, mid): Array<IEpisode> {
-        return state.episodes.filter(x => x.movieId == mid);
-    }
+    episodes: state => state.episodes
 }
 
 export const episode: Module<EpisodeState, any> = {
