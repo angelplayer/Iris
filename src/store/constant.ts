@@ -11,3 +11,4 @@ export const DELETE_MOVIE = "deleteMovie"
 
 export const CREATE_EPISODE = 'postEpisode'
 export const FETCH_EPISODES = 'getEpisodeByMovieId'
+export const DELETE_EPISODE = 'deleteEpisode'

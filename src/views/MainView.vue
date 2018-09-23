@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <movie-list :list="movies"  @selected="onSelected" @edit="edit" @remove="remove"></movie-list>
-                        <episode-list v-if="selectedMovie" :movie-id="selectedMovie.movieId" :list="episodeList"></episode-list>
+                        <episode-list v-if="selectedMovie" :list="episodes"></episode-list>
                     </div>
                     <div class="col-md-4">
                       <transition enter-active-class="animated shake" duration="300" mode="in-out">
@@ -27,8 +27,10 @@ import MovieList from "@/components/MovieList.vue";
 import MovieCard from "@/components/MovieCard.vue";
 import { State, Getter } from "vuex-class";
 import { IMovie, Movie, MoviesService, IEpisode } from "@/services/hyouka-api";
-import { FETCH_MOVIES, DELETE_MOVIE } from "@/store/constant";
+import { FETCH_MOVIES, DELETE_MOVIE, FETCH_EPISODES } from "@/store/constant";
 import EpisodeList from "@/components/EpisodeList.vue";
+import { Watch } from "vue-property-decorator";
+import { episode } from "@/store/episode-state";
 
 @Component({
   components: {
@@ -39,7 +41,7 @@ import EpisodeList from "@/components/EpisodeList.vue";
 })
 export default class MainView extends Vue {
   @Getter("movieItems") movies: Array<IMovie>;
-  @Getter("episodes") allEpisode: Array<IEpisode>;
+  @Getter("episodes") episodes: Array<IEpisode>;
 
   selectedMovie: IMovie = null;
 
@@ -65,10 +67,11 @@ export default class MainView extends Vue {
     this.$store.dispatch(DELETE_MOVIE, movie.movieId);
   }
 
-  get episodeList(): Array<IEpisode> {
-    return this.selectedMovie
-      ? this.allEpisode.filter(x => x.movieId == this.selectedMovie.movieId)
-      : null;
+  @Watch("selectedMovie")
+  onSelectedMovieChange() {
+    if (this.selectedMovie) {
+      this.$store.dispatch(FETCH_EPISODES, this.selectedMovie.movieId);
+    }
   }
 }
 </script>
