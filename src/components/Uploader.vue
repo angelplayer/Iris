@@ -1,17 +1,31 @@
 <template>
-    <div>
-        <label @click="close()" class="demo-icon mr-auto mouse">
-            <div class="icon-preview mr-0"><i class="la la la-times"></i></div>
-        </label>
-        <input v-model="newEpisode.number" placeholder="No" type="text mx-1" class="form-control mx-1">
-        <input v-model="newEpisode.name" placeholder="Episdoe name..." type="text mx-1" class="form-control">
-        <label class="demo-icon px-1 mx-1 mouse">
-            <div @click="chooseFile()" class="icon-preview" :class="{'text-info':hasFile}" ><i class="la la-film"></i></div>
-        </label>
-        <p  class="form-control-static"></p>
-        <label class="demo-icon ml-auto mouse">
-            <div @click="upload()" class="icon-preview"><i class="la la la-plane"></i></div>
-        </label>
+    <div class="card">
+       <div class="card-body">
+         <div class="card-header">
+            <h5 class="card-text">New Episode</h5>
+         </div>
+         <div class="form-group row">
+           <label class="col-md-4">Episode Number</label>
+           <div class="col-md-4">
+             <input class="form-control" v-model="newEpisode.number" placeholder="eg. Ep.11">
+           </div>
+         </div>
+        <div class="form-group row">
+          <label class="col-md-4">Episode Name:</label>
+          <div class="col-md-8">
+            <input class="form-control" v-model="newEpisode.name" placeholder="eg. The School">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4">Media:</label>
+          <label for="" class="col-md-8">
+              <button @click="chooseFile()" class="btn btn-info w-100 py-1">{{getMediaName}}</button>
+          </label>
+        </div>
+        <div class="form-group">
+          <button @click="upload()" class="btn btn-primary "><i></i>Upload</button>
+        </div>
+       </div>
     </div>
 </template>
 
@@ -25,9 +39,10 @@ import { Prop } from "vue-property-decorator";
 
 @Component
 export default class Uploader extends Vue {
-  newEpisode: EpisodeData = new EpisodeData({file: '',name: ''});
+  newEpisode: EpisodeData = new EpisodeData({ file: "", name: "" });
 
-  @Prop() movieId: number;
+  @Prop({ required: true })
+  movieId: number;
 
   chooseFile(): void {
     this.newEpisode.file = "abc.mp4";
@@ -49,8 +64,8 @@ export default class Uploader extends Vue {
     this.$emit("click");
   }
 
-  get hasFile() {
-    return this.newEpisode.file != "";
+  get getMediaName() {
+    return this.newEpisode.file ? this.newEpisode.file : "SELECT FILE";
   }
 }
 </script>

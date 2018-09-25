@@ -33,10 +33,7 @@
                             </td>
                             <td>{{item.name}}</td>
                             <td class="td-actions text-right">
-                                <div v-if="movieId" class="form-button-action">
-                                    <button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
-                                        <i class="la la-edit"></i>
-                                    </button>
+                                <div class="form-button-action">
                                     <button @click="remove(item)" type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
                                         <i class="la la-times"></i>
                                     </button>
@@ -49,7 +46,7 @@
         </div>
         <div class="card-footer ">
             <div class="stats">
-                <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                <!-- <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago -->
             </div>
         </div>
     </div>
