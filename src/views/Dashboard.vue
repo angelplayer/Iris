@@ -5,9 +5,9 @@
 			<app-header></app-header>
 		</div>
 			<app-sidebar :links="navs"></app-sidebar>
-      <transition duration="300" enter-active-class="animated zoomIn" mode="out-in" leave-active-class="animated fadeOutRightBig">
+      <!-- <transition duration="300" enter-active-class="animated zoomIn" mode="out-in" leave-active-class="animated fadeOutRightBig"> -->
       <router-view></router-view>	
-      </transition>
+      <!-- </transition> -->
 	</div>
 </template>
 
@@ -44,7 +44,8 @@ export default class Dashboard extends Vue {
     this.navs = [
       { url: "/admin", name: "Dashboard", icon: "la la-dashboard" },
       { url: "/admin/create", name: "create", icon: "la la-edit" },
-      { url: "/admin/genre", name: "genre", icon: "la la-group" }
+      { url: "/admin/genre", name: "genre", icon: "la la-group" },
+      { url: "/admin/file", name: "file", icon: "la la-gear" }
     ];
   }
 

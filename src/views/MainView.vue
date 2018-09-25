@@ -4,15 +4,19 @@
             <div class="container-fluid">
                 <h4 class="page-title">Dashboard</h4>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7 col-sm-8">
                         <movie-list :list="movies"  @selected="onSelected" @edit="edit" @remove="remove"></movie-list>
+                        <div class="row">
+                          <div class="col-md-6">
+                          </div>
+                          <div class="col-md-6">
+                            <uploader v-if="selectedMovie" :movie-id="selectedMovie.movieId"></uploader>
+                          </div>
+                        </div>
                     </div>
-                     <div class="col-md-4" v-if="selectedMovie">
-                        <uploader :movie-id="selectedMovie.movieId" />
-                        <episode-list :list="episodes"></episode-list>
-                    </div>
-                    <div class="col-md-2">
-                        <movie-card v-if="selectedMovie" :movie="selectedMovie"></movie-card>
+                      <div class="col-md-5 col-sm-4">
+                         <movie-card v-if="selectedMovie" :movie="selectedMovie"></movie-card>
+                        <episode-list v-if="selectedMovie" :list="episodes"></episode-list>
                     </div>
                 </div>
             </div>
@@ -43,10 +47,8 @@ import { episode } from "@/store/episode-state";
   }
 })
 export default class MainView extends Vue {
-  @Getter("movieItems")
-  movies: Array<IMovie>;
-  @Getter("episodes")
-  episodes: Array<IEpisode>;
+  @Getter("movieItems") movies: Array<IMovie>;
+  @Getter("episodes") episodes: Array<IEpisode>;
 
   selectedMovie: IMovie = null;
 

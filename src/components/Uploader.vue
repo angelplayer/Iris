@@ -2,7 +2,7 @@
     <div class="card">
        <div class="card-body">
          <div class="card-header">
-            <h5 class="card-text">New Episode</h5>
+            <h6 class="card-text">New Episode</h6>
          </div>
          <div class="form-group row">
            <label class="col-md-4">Episode Number</label>

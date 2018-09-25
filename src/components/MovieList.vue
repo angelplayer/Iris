@@ -5,7 +5,7 @@
     <p class="card-category">Recent movie</p>
 </div>
 <div class="card-body">
-    <table class="table table-head-bg-danger table-striped table-hover">
+    <table class="table table-head-bg-info table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" class="touch" :class="{'bg-info': selectedRow == index}">
+            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" class="touch" :class="{'bg-success': selectedRow == index}">
                 <td>{{item.movieId}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.episodeCount}}</td>

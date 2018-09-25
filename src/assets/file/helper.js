@@ -1,0 +1,1 @@
+angular.lowercase = text => text.toLowerCase();

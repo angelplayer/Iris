@@ -6,6 +6,7 @@ import Auth from "./views/Auth.vue";
 import GenreView from '@/views/GenreView.vue'
 import MainView from '@/views/MainView.vue'
 import Creator from '@/views/Creator.vue'
+import FileView from '@/views/FileView.vue'
 
 Vue.use(Router);
 
@@ -50,6 +51,11 @@ export default new Router({
           path: 'create/:id?',
           name: 'create',
           component: Creator
+        },
+        {
+          path: 'file',
+          name: 'file',
+          component: FileView
         }
       ]
     }

@@ -16,7 +16,7 @@ export const mutations: MutationTree<EpisodeState> = {
         state.episodes.push(payload);
     },
     removeEpisode(state: EpisodeState, payload: IEpisode): void {
-        state.episodes = state.episodes.filter(x => x.episodeId == payload.episodeId);
+        state.episodes = state.episodes.filter(x => x.episodeId != payload.episodeId);
     }
 
 }
