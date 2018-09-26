@@ -11,7 +11,6 @@
 	</div>
 </template>
 
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
@@ -19,17 +18,17 @@ import AppSidebar from "@/components/layout/AppSidebar.vue";
 import AppHeader from "@/components/layout/AppHeader.vue";
 import AdminHeader from "@/components/layout/AdminHeader.vue";
 import { Getter, Action } from "vuex-class";
-import "@/assets/css/bootstrap.min.css";
-
-// import 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"';
-import "@/assets/css/ready.css";
-import "@/assets/css/demo.css";
 import { Ilink } from "@/types/layout";
 import { AppState } from "@/types/state";
 import { LOGIN, FETCH_GENRES } from "@/store/constant";
 import { LoginData } from "@/services/hyouka-api";
 import GenreView from "@/views/GenreView.vue";
+
 import "../../node_modules/animate.css/animate.min.css";
+import "@/assets/css/bootstrap.min.css";
+// import 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"';
+import "@/assets/css/ready.css";
+import "@/assets/css/demo.css";
 
 @Component({
   components: { AppSidebar, AppHeader, AdminHeader }

@@ -24,7 +24,6 @@
     </div>
 </template>
 
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
@@ -47,8 +46,10 @@ import { episode } from "@/store/episode-state";
   }
 })
 export default class MainView extends Vue {
-  @Getter("movieItems") movies: Array<IMovie>;
-  @Getter("episodes") episodes: Array<IEpisode>;
+  @Getter("movieItems")
+  movies: Array<IMovie>;
+  @Getter("episodes")
+  episodes: Array<IEpisode>;
 
   selectedMovie: IMovie = null;
 
