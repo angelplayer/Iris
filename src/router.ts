@@ -7,7 +7,7 @@ import GenreView from '@/views/GenreView.vue'
 import MainView from '@/views/MainView.vue'
 import Creator from '@/views/Creator.vue'
 import FileView from '@/views/FileView.vue'
-import FileManagerComponent from '@/components/file/FileManagerComponent.vue'
+import CreateFolderModal from '@/components/file/CreateFolderModal.vue'
 
 Vue.use(Router);
 
@@ -23,8 +23,8 @@ export default new Router({
     {
       path: '/media',
       name: 'media',
-      component: FileManagerComponent
-  },
+      component: CreateFolderModal
+    },
     {
       path: '/about',
       name: 'about',
