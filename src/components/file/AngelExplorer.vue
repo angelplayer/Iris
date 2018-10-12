@@ -1,0 +1,236 @@
+<template>
+    <div class="explorer">
+      <div class="ex-header">
+        <nav aria-label="breadcrumb bg-none my-0">
+          <ol class="breadcrumb bg-none my-0">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+          </ol>
+        </nav>
+        <div class="nav-action">
+          <button @click="createFolder" class="cool button"><i class="la la-plus"></i></button>
+          <button @click="uploadFile" class="cool button"><i class="la la-upload"></i></button>
+        </div>
+      </div>
+      <div class="ex-body">
+        <ul class="file-list unstyled-list">
+          <li class="file-list-item" v-for="(item, index) in sortedFileItems" :key="index" >
+            <!-- <label for="">
+              <input type="checkbox"/>
+            </label> -->
+            <div class="item file-item-logo">
+              <span class="file-icon"><i :class="fileType(item.type)"></i></span>
+            </div>
+            <div class="item file-item-meta">
+              <a @dblclick="open(item)" class="file-meta-name">
+                <span>{{item.name}}</span>
+              </a>
+              <span>{{item.size}}</span>
+              <span>{{item.date}}</span>
+            </div>
+            <div class="item file-item-action">
+              <button @click="open(item)" class="button">Preview</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <content-modal ref="previewer"/>
+      <create-folder-modal @submit="submit" ref="createModal"/>
+      <upload-file-modal @submit="submit" ref="uploadModal"/>
+    </div>
+</template>
+
+
+<style scoped>
+.bg-none {
+  background: none;
+}
+.explorer {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.301);
+  margin: 15px auto;
+  font-family: "Roboto Mono";
+}
+.ex-header {
+  height: 10%;
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.nav-action {
+  margin-left: auto;
+}
+.nav-head {
+}
+.ex-body {
+  padding: 5px;
+  height: 90%;
+  width: 100%;
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+  overflow-y: scroll;
+}
+.file-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.file-list-item {
+  border-bottom: 1px solid rgba(28, 139, 212, 0.1);
+  display: flex;
+  padding: 5px 5px;
+  flex: 1 1 0%;
+  flex-direction: row;
+}
+.file-list-item:hover {
+  background: rgba(100, 148, 237, 0.1);
+}
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.file-item-logo {
+  width: 50px;
+}
+.file-item-meta {
+  flex: 2 1 0%;
+  flex-direction: row;
+}
+.file-meta-name:hover {
+  cursor: pointer;
+}
+
+.file-item-meta > * {
+  flex: 1 1 0;
+  word-break: break-all;
+}
+
+.file-meta-name,
+.file-meta-name span {
+  flex: 2 1 0%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.file-item-action {
+  align-self: center;
+  font-weight: 600;
+}
+.file-icon {
+  font-size: 30px;
+}
+</style>
+<style>
+.button {
+  border: none;
+  padding: 7px 13px;
+  cursor: pointer;
+}
+.cool {
+  background-color: DodgerBlue !important;
+  color: white !important;
+}
+
+.control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(100, 148, 237, 0);
+  border-radius: 0;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+.control:focus {
+  border: 1px solid rgba(100, 148, 237, 0.3);
+}
+</style>
+
+
+<script lang="ts">
+import Vue from "vue";
+import { IFileData, FileService, ActionCommand } from "@/services/hyouka-api";
+import ContentModal from "@/components/file/ContentModal.vue";
+import CreateFolderModal from "@/components/file/CreateFolderModal.vue";
+import UploadFileModal from "@/components/file/UploadFileModal.vue";
+import Component from "vue-class-component";
+
+@Component({
+  components: {
+    ContentModal,
+    CreateFolderModal,
+    UploadFileModal
+  }
+})
+export default class AngelExplorer extends Vue {
+  basePath = "/";
+  currentPath: string = null;
+  dropdown = false;
+
+  fileItem: Array<IFileData>;
+
+  modalComp: any = null;
+
+  constructor() {
+    super();
+    this.currentPath = this.basePath;
+    this.fileItem = new Array<IFileData>();
+  }
+
+  mounted() {
+    this.$nextTick(() => {});
+    this.fetchFile(this.currentPath);
+  }
+
+  get sortedFileItems() {
+    return this.fileItem.sort((a, b) => {
+      return a.type == "dir" ? -1 : 1;
+    });
+  }
+
+  open(file: IFileData) {
+    if (file.type == "dir") {
+      this.currentPath += file.name + "/";
+      this.fetchFile(this.currentPath);
+    } else if (file.type == "file") {
+      let source = this.currentPath + file.name;
+      (this.$refs.previewer as ContentModal).show(source);
+    }
+  }
+
+  createFolder() {
+    let component = this.$refs.createModal as CreateFolderModal;
+    component.show();
+    component.setPath(this.currentPath);
+  }
+
+  uploadFile() {
+    let component = this.$refs.uploadModal as UploadFileModal;
+    component.show();
+    component.setPath(this.currentPath);
+  }
+
+  submit() {
+    this.fetchFile(this.currentPath);
+  }
+
+  fileType(type: string) {
+    return type == "dir" ? "fa fa-folder text-warning" : "fa fa-file text-info";
+  }
+
+  fetchFile(path: string) {
+    new FileService()
+      .navigate(new ActionCommand({ action: "list", path: path }))
+      .then(envelope => {
+        console.log(envelope);
+        this.fileItem = envelope.result;
+      });
+  }
+}
+</script>

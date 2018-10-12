@@ -1,5 +1,5 @@
 <template>
-   <div id="myModal" class="ex-modal" :class="{'show': isShow}">
+       <div id="myModal" class="ex-modal" :class="{'show': isShow}">
     <!-- Modal content -->
     <div class="ex-modal-content">
       <div class="ex-modal-header">
@@ -7,7 +7,7 @@
         <h6 class="ex-modal-title">New Folder</h6>
       </div>
       <div class="ex-modal-body">
-        <input placeholder="Folder name" class="control" type="text" v-model="name"/>
+        <input multiple ref="fileInput" @change="addFileToUpload($event)" type="file" placeholder="Folder name" class="control"/>
       </div>
       <div class="ex-modal-footer">
          <button @click="submit" class="button cool"><i class="fa fa-plus"></i> Create</button>
@@ -15,6 +15,46 @@
     </div>
   </div>
 </template>
+
+
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import ModalComponent from "@/components/file/ModalComponent.vue";
+import { EventEmitter } from "events";
+import { FileService, FileUploadModel } from "@/services/hyouka-api";
+
+@Component
+export default class UploadFileModal extends ModalComponent {
+  currentPath: string;
+  files: FormData;
+
+  constructor() {
+    super();
+    this.files = new FormData();
+    console.log(this.files);
+  }
+
+  setPath(path: string) {
+    this.currentPath = path;
+  }
+
+  addFileToUpload(event: Event) {
+    let elem = event.target as HTMLInputElement;
+    for (let i = 0; i < elem.files.length; i++) {
+      this.files.append(`file-${i}`, elem.files[i]);
+    }
+  }
+
+  submit() {
+    let m = new FileUploadModel();
+    m.destination = "/";
+    new FileService().upload();
+  }
+}
+</script>
+
+
 
 <style scoped>
 /* The Modal (background) */
@@ -107,58 +147,3 @@
   color: white;
 }
 </style>
-
-
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import ModalComponent from "@/components/file/ModalComponent.vue";
-import { FileService, ActionCommand } from "@/services/hyouka-api";
-import { emit } from "cluster";
-import { Prop } from "vue-property-decorator";
-
-@Component
-export default class CreateFolderModal extends ModalComponent {
-  path: string = "";
-
-  name: string = "";
-
-  constructor() {
-    super();
-    this.isShow = false;
-  }
-
-  setPath(path: string) {
-    this.path = path;
-  }
-
-  reset() {
-    this.hide();
-    this.path = "";
-    this.name = "";
-  }
-
-  submit() {
-    if (this.name === "") return;
-
-    return new Promise((resolve, reject) => {
-      return new FileService()
-        .fileAction(
-          new ActionCommand({
-            action: "createFolder",
-            newPath: this.path + this.name
-          })
-        )
-        .then(envelope => {
-          resolve(envelope.result);
-        })
-        .catch(e => reject(e))
-        .finally(() => {
-          this.$emit("submit");
-          this.reset();
-        });
-    });
-  }
-}
-</script>
-
