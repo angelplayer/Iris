@@ -30,6 +30,8 @@
             </div>
             <div class="item file-item-action">
               <button @click="open(item)" class="button">Preview</button>
+              <button @click="download(item)" class="button">Download</button>
+              <button @click="remove(item)" class="button">Delete</button>
             </div>
           </li>
         </ul>
@@ -202,6 +204,31 @@ export default class AngelExplorer extends Vue {
       let source = this.currentPath + file.name;
       (this.$refs.previewer as ContentModal).show(source);
     }
+  }
+
+  download(file: IFileData) {
+    new FileService()
+      .download("download", this.currentPath + file.name)
+      .then(envelope => console.log(envelope.fileName))
+      .catch(e => console.log(e))
+      .finally(() => {
+        this.submit();
+      });
+  }
+
+  remove(file: IFileData) {
+    new FileService()
+      .fileAction(
+        new ActionCommand({
+          action: "remove",
+          items: [this.currentPath + file.name]
+        })
+      )
+      .then(envelop => console.log(envelop.result.success))
+      .catch(e => console.log(e))
+      .finally(() => {
+        this.submit();
+      });
   }
 
   createFolder() {

@@ -14,8 +14,8 @@
 
 <style scoped>
 .file-manager {
-  width: 1000px;
-  height: 500px;
+  width: 1200px;
+  height: 800px;
 }
 </style>
 
