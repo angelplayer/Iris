@@ -104,6 +104,7 @@
 .preview-img {
   max-width: 100%;
   max-height: 100%;
+  display: block;
   margin: 0 auto;
 }
 </style>

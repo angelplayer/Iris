@@ -7,7 +7,7 @@ import GenreView from '@/views/GenreView.vue'
 import MainView from '@/views/MainView.vue'
 import Creator from '@/views/Creator.vue'
 import FileView from '@/views/FileView.vue'
-import AngelExplorer from '@/components/file/AngelExplorer.vue'
+import Breadcrum from '@/components/file/Breadcrum.vue'
 
 Vue.use(Router);
 
@@ -23,7 +23,7 @@ export default new Router({
     {
       path: '/media',
       name: 'media',
-      component: AngelExplorer
+      component: Breadcrum
     },
     {
       path: '/about',

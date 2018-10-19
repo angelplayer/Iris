@@ -1,12 +1,7 @@
 <template>
     <div class="explorer">
       <div class="ex-header">
-        <nav aria-label="breadcrumb bg-none my-0">
-          <ol class="breadcrumb bg-none my-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
-          </ol>
-        </nav>
+        <breadcrum :data="navigator.directory" @navigate="changeDirectory"/>
         <div class="nav-action">
           <button @click="createFolder" class="cool button"><i class="la la-plus"></i></button>
           <button @click="uploadFile" class="cool button"><i class="la la-upload"></i></button>
@@ -65,8 +60,6 @@
 }
 .nav-action {
   margin-left: auto;
-}
-.nav-head {
 }
 .ex-body {
   padding: 5px;
@@ -162,20 +155,24 @@ import ContentModal from "@/components/file/ContentModal.vue";
 import CreateFolderModal from "@/components/file/CreateFolderModal.vue";
 import UploadFileModal from "@/components/file/UploadFileModal.vue";
 import Component from "vue-class-component";
+import Breadcrum from "@/components/file/Breadcrum.vue";
+import DirectoryNavigator from "@/types/Navigator.ts";
 
 @Component({
   components: {
     ContentModal,
     CreateFolderModal,
-    UploadFileModal
+    UploadFileModal,
+    Breadcrum
   }
 })
 export default class AngelExplorer extends Vue {
   basePath = "/";
-  currentPath: string = null;
   dropdown = false;
-
   fileItem: Array<IFileData>;
+  navigator: DirectoryNavigator;
+
+  currentPath: string = null;
 
   modalComp: any = null;
 
@@ -183,6 +180,7 @@ export default class AngelExplorer extends Vue {
     super();
     this.currentPath = this.basePath;
     this.fileItem = new Array<IFileData>();
+    this.navigator = new DirectoryNavigator(this.basePath);
   }
 
   mounted() {
@@ -196,21 +194,32 @@ export default class AngelExplorer extends Vue {
     });
   }
 
+  changeDirectory(directory) {
+    this.navigator
+      .jump(directory)
+      .then(path => (this.currentPath = path))
+      .then(() => this.fetchFile(this.currentPath));
+  }
+
   open(file: IFileData) {
     if (file.type == "dir") {
-      this.currentPath += file.name + "/";
-      this.fetchFile(this.currentPath);
+      this.navigator
+        .go(file.name)
+        .then(path => (this.currentPath = path))
+        .then(() => this.fetchFile(this.currentPath));
     } else if (file.type == "file") {
-      let source = this.currentPath + file.name;
+      let source = this.currentPath + "/" + file.name;
       (this.$refs.previewer as ContentModal).show(source);
     }
   }
 
   download(file: IFileData) {
     new FileService()
-      .download("download", this.currentPath + file.name)
-      .then(envelope => console.log(envelope.fileName))
-      .catch(e => console.log(e))
+      .download("download", this.currentPath + "/" + file.name)
+      .then(envelope => {
+        console.log(envelope.data); //envelope.data if file binary (blob)
+      })
+      .catch(e => console.error(e))
       .finally(() => {
         this.submit();
       });
@@ -221,7 +230,7 @@ export default class AngelExplorer extends Vue {
       .fileAction(
         new ActionCommand({
           action: "remove",
-          items: [this.currentPath + file.name]
+          items: [this.currentPath + "/" + file.name]
         })
       )
       .then(envelop => console.log(envelop.result.success))
@@ -234,7 +243,7 @@ export default class AngelExplorer extends Vue {
   createFolder() {
     let component = this.$refs.createModal as CreateFolderModal;
     component.show();
-    component.setPath(this.currentPath);
+    component.setPath(this.currentPath + "/");
   }
 
   uploadFile() {
@@ -252,10 +261,9 @@ export default class AngelExplorer extends Vue {
   }
 
   fetchFile(path: string) {
-    new FileService()
+    return new FileService()
       .navigate(new ActionCommand({ action: "list", path: path }))
       .then(envelope => {
-        console.log(envelope);
         this.fileItem = envelope.result;
       });
   }
