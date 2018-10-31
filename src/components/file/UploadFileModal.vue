@@ -153,8 +153,6 @@ export default class UploadFileModal extends ModalComponent {
   overflow-y: auto;
 }
 
-.list-group-item {
-}
 
 /* Add Animation */
 @-webkit-keyframes animatetop {

@@ -28,6 +28,7 @@
               <button @click="open(item)" class="button">Preview</button>
               <button @click="download(item)" class="button">Download</button>
               <button @click="remove(item)" class="button">Delete</button>
+              <elipse-button icon="la la-home" button="button" text="Action" :content="actionsButton" :params="item"/>
             </div>
           </li>
         </ul>
@@ -160,6 +161,7 @@ import Component from "vue-class-component";
 import Breadcrum from "@/components/file/Breadcrum.vue";
 import DirectoryNavigator from "@/types/Navigator.ts";
 import RenameModal from "@/components/file/RenameModal.vue";
+import ElipseButton from "@/components/file/ElipseButton.vue";
 
 @Component({
   components: {
@@ -167,7 +169,8 @@ import RenameModal from "@/components/file/RenameModal.vue";
     CreateFolderModal,
     UploadFileModal,
     Breadcrum,
-    RenameModal
+    RenameModal,
+    ElipseButton
   }
 })
 export default class AngelExplorer extends Vue {
@@ -180,6 +183,8 @@ export default class AngelExplorer extends Vue {
 
   modalComp: any = null;
 
+  actionsButton: Array<{ name; hanlder; enable: boolean }> = [];
+
   constructor() {
     super();
     this.currentPath = this.basePath;
@@ -188,6 +193,12 @@ export default class AngelExplorer extends Vue {
   }
 
   mounted() {
+    this.actionsButton = [
+      { name: "Preview", enable: true, hanlder: this.open },
+      { name: "Download", enable: true, hanlder: this.download },
+      { name: "Delete", enable: true, hanlder: this.remove },
+      { name: "Rename", enable: true, hanlder: this.rename }
+    ];
     this.$nextTick(() => {});
     this.fetchFile(this.currentPath);
   }
@@ -267,7 +278,7 @@ export default class AngelExplorer extends Vue {
   }
 
   fileType(type: string) {
-    return type == "dir" ? "fa fa-folder text-warning" : "fa fa-file text-info";
+    return type == "dir" ? "fa fa-folder text-info" : "fa fa-file text-info";
   }
 
   fetchFile(path: string) {
@@ -276,6 +287,10 @@ export default class AngelExplorer extends Vue {
       .then(envelope => {
         this.fileItem = envelope.result;
       });
+  }
+
+  get actionEnableButton() {
+    return this.actionsButton.filter(x => x.enable);
   }
 }
 </script>
