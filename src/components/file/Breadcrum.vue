@@ -5,7 +5,6 @@
                 <a @click.prevent="navigateTo(index)" href="#">{{item}}</a>
             </li>
         </ol>
-        {{currentUrl}}
     </nav>
 </template>
 

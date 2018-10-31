@@ -24,6 +24,7 @@
               <span>{{item.date}}</span>
             </div>
             <div class="item file-item-action">
+              <button @click="rename(item)" class="button">Rename</button>
               <button @click="open(item)" class="button">Preview</button>
               <button @click="download(item)" class="button">Download</button>
               <button @click="remove(item)" class="button">Delete</button>
@@ -32,6 +33,7 @@
         </ul>
       </div>
       <content-modal ref="previewer"/>
+      <rename-modal  @submit="submit" ref="renameModal"/>
       <create-folder-modal @submit="submit" ref="createModal"/>
       <upload-file-modal @submit="submit" ref="uploadModal"/>
     </div>
@@ -157,13 +159,15 @@ import UploadFileModal from "@/components/file/UploadFileModal.vue";
 import Component from "vue-class-component";
 import Breadcrum from "@/components/file/Breadcrum.vue";
 import DirectoryNavigator from "@/types/Navigator.ts";
+import RenameModal from "@/components/file/RenameModal.vue";
 
 @Component({
   components: {
     ContentModal,
     CreateFolderModal,
     UploadFileModal,
-    Breadcrum
+    Breadcrum,
+    RenameModal
   }
 })
 export default class AngelExplorer extends Vue {
@@ -223,6 +227,12 @@ export default class AngelExplorer extends Vue {
       .finally(() => {
         this.submit();
       });
+  }
+
+  rename(file: IFileData) {
+    let component = this.$refs.renameModal as RenameModal;
+    component.rename(this.currentPath + "/", file.name);
+    component.show();
   }
 
   remove(file: IFileData) {
