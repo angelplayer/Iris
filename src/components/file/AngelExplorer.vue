@@ -24,11 +24,7 @@
               <span>{{item.date}}</span>
             </div>
             <div class="item file-item-action">
-              <button @click="rename(item)" class="button">Rename</button>
-              <button @click="open(item)" class="button">Preview</button>
-              <button @click="download(item)" class="button">Download</button>
-              <button @click="remove(item)" class="button">Delete</button>
-              <elipse-button icon="la la-home" button="button" text="Action" :content="actionsButton" :params="item"/>
+              <elipse-button icon="la la-ellipsis-v" button="bg-light button" :content="actionsButton" :params="item"/>
             </div>
           </li>
         </ul>
@@ -183,7 +179,7 @@ export default class AngelExplorer extends Vue {
 
   modalComp: any = null;
 
-  actionsButton: Array<{ name; hanlder; enable: boolean }> = [];
+  actionsButton: Array<{ name; handler; enable: boolean }> = [];
 
   constructor() {
     super();
@@ -194,10 +190,10 @@ export default class AngelExplorer extends Vue {
 
   mounted() {
     this.actionsButton = [
-      { name: "Preview", enable: true, hanlder: this.open },
-      { name: "Download", enable: true, hanlder: this.download },
-      { name: "Delete", enable: true, hanlder: this.remove },
-      { name: "Rename", enable: true, hanlder: this.rename }
+      { name: "Preview", enable: true, handler: this.open },
+      { name: "Download", enable: true, handler: this.download },
+      { name: "Delete", enable: true, handler: this.remove },
+      { name: "Rename", enable: true, handler: this.rename }
     ];
     this.$nextTick(() => {});
     this.fetchFile(this.currentPath);

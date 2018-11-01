@@ -4,13 +4,13 @@
     <div class="ex-modal-content">
       <div class="ex-modal-header">
         <span @click="hide()" class="close">&times;</span>
-        <h6 class="ex-modal-title">New Folder</h6>
+        <h6 class="ex-modal-title">Rename</h6>
       </div>
       <div class="ex-modal-body">
         <input class="control" type="text" v-model="itemName"/>
       </div>
       <div class="ex-modal-footer">
-         <button @click="submit" class="button cool"><i class="fa fa-plus"></i> Create</button>
+         <button @click="submit" class="button cool"><i class="fa fa-plus"></i>Save Change</button>
       </div>
     </div>
   </div>

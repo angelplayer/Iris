@@ -1,8 +1,8 @@
 <template>
-    <div class="elipse">
-        <button class="elipse-btn" :class="button"><i :class="icon"></i>{{text}}</button>
-        <div class="elipse-content">
-            <a v-for="(item, index) in content" @click="handle(item)" :key="index">{{item.name}}</a>
+    <div class="elipse" >
+        <button @blur="close" @click="show = !show" class="elipse-btn" :class="button"><i :class="icon"></i>{{text}}</button>
+        <div  class="elipse-content" :class="{'d-block animated jello': show}">
+            <a v-for="(item, index) in content" @click="item.handler(params)" :key="index">{{item.name}}</a>
         </div>
     </div>
 </template>
@@ -29,10 +29,13 @@ export default class ElipseButton extends Vue {
   @Prop()
   params: any;
 
-    handle(target) {
-        target.handle();
-    }
+  close() {
+    setTimeout(() => {
+      this.show = false;
+    }, 150);
+  }
 
+  private show: boolean = false;
 }
 </script>
 
@@ -63,11 +66,14 @@ export default class ElipseButton extends Vue {
 }
 
 .elipse:hover .elipse-content {
-  display: block;
+  /* display: block; */
+}
+
+.elipse-btn {
+  border-radius: 50%;
 }
 
 .elipse:hover .elipse-btn {
-  background-color: #3e8e41;
 }
 </style>
 

@@ -38,7 +38,7 @@
 /* Modal Content */
 .ex-modal-content {
   position: relative;
-  background-color: #000000;
+  background-color: rgba(255, 255, 255, 0.692);
   margin: auto;
   padding: 0;
   border: 1px solid #888;
