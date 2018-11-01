@@ -112,7 +112,6 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import ModalComponent from "@/components/file/ModalComponent.vue";
 import { FileService, ActionCommand } from "@/services/hyouka-api";
-import { emit } from "cluster";
 import { Prop } from "vue-property-decorator";
 
 @Component

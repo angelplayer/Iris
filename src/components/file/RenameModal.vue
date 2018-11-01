@@ -16,6 +16,10 @@
   </div>
 </template>
 
+<style scoped>
+</style>
+
+
 <script lang="ts">
 import Vue from "vue";
 import ModalComponent from "@/components/file/ModalComponent.vue";

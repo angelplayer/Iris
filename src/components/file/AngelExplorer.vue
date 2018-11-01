@@ -24,7 +24,7 @@
               <span>{{item.date}}</span>
             </div>
             <div class="item file-item-action">
-              <elipse-button icon="la la-ellipsis-v" button="bg-light button" :content="actionsButton" :params="item"/>
+              <elipse-button icon="la la-ellipsis-v" button="btn-outline-primary button" :content="actionsButton" :params="item"/>
             </div>
           </li>
         </ul>
@@ -192,8 +192,8 @@ export default class AngelExplorer extends Vue {
     this.actionsButton = [
       { name: "Preview", enable: true, handler: this.open },
       { name: "Download", enable: true, handler: this.download },
-      { name: "Delete", enable: true, handler: this.remove },
-      { name: "Rename", enable: true, handler: this.rename }
+      { name: "Rename", enable: true, handler: this.rename },
+      { name: "Delete", enable: true, handler: this.remove }
     ];
     this.$nextTick(() => {});
     this.fetchFile(this.currentPath);
