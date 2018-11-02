@@ -117,7 +117,6 @@ import { Prop } from "vue-property-decorator";
 
 @Component
 export default class ContentModal extends Vue {
-  @Prop({ type: String, required: false })
   source: string;
 
   isShow: boolean = false;

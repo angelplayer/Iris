@@ -9,7 +9,7 @@
       </div>
       <div class="ex-body">
         <ul class="file-list unstyled-list">
-          <li class="file-list-item" v-for="(item, index) in sortedFileItems" :key="index" >
+          <li class="file-list-item"  v-for="(item, index) in sortedFileItems" :key="index"  :class="{'bg-fantasy': selectedIndex == index}"  >
             <!-- <label for="">
               <input type="checkbox"/>
             </label> -->
@@ -17,7 +17,7 @@
               <span class="file-icon"><i :class="fileType(item.type)"></i></span>
             </div>
             <div class="item file-item-meta">
-              <a @dblclick="open(item)" class="file-meta-name">
+              <a @dblclick="open(item)" @click="select(index)" class="file-meta-name">
                 <span>{{item.name}}</span>
               </a>
               <span>{{item.size}}</span>
@@ -117,6 +117,10 @@
 .file-icon {
   font-size: 30px;
 }
+.bg-fantasy,
+.bg-fantasy .file-list-item:hover {
+  background-color: rgba(73, 156, 234, 0.432) !important;
+}
 </style>
 <style>
 .button {
@@ -177,6 +181,8 @@ export default class AngelExplorer extends Vue {
 
   currentPath: string = null;
 
+  selectedIndex = -1;
+
   modalComp: any = null;
 
   actionsButton: Array<{ name; handler; enable: boolean }> = [];
@@ -199,6 +205,10 @@ export default class AngelExplorer extends Vue {
     this.fetchFile(this.currentPath);
   }
 
+  select(index) {
+    this.selectedIndex = this.selectedIndex != index ? index : -1;
+  }
+
   get sortedFileItems() {
     return this.fileItem.sort((a, b) => {
       return a.type == "dir" ? -1 : 1;
@@ -219,8 +229,9 @@ export default class AngelExplorer extends Vue {
         .then(path => (this.currentPath = path))
         .then(() => this.fetchFile(this.currentPath));
     } else if (file.type == "file") {
-      let source = this.currentPath + "/" + file.name;
-      (this.$refs.previewer as ContentModal).show(source);
+      (this.$refs.previewer as ContentModal).show(
+        this.currentPath + "/" + file.name
+      );
     }
   }
 
@@ -274,7 +285,7 @@ export default class AngelExplorer extends Vue {
   }
 
   fileType(type: string) {
-    return type == "dir" ? "fa fa-folder text-info" : "fa fa-file text-info";
+    return type == "dir" ? "fa fa-folder text-dark" : "fa fa-file text-dark";
   }
 
   fetchFile(path: string) {
