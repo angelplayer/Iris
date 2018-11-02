@@ -14,8 +14,10 @@
 
 <style scoped>
 .file-manager {
-  width: 1000px;
-  height: 600px;
+  width: 100%;
+  max-width: 1600px;
+  height: 80vh;
+  max-height: 800px;
 }
 </style>
 

@@ -16,8 +16,10 @@
         </div>
       </div>
     </div>
+    <modal-component ref="explorer" vWidth="1000" vHeight="500">
+      <angel-explorer @onpick="insertImg"/>
+    </modal-component>
   </div>
-
 </template>
 
 
@@ -27,6 +29,8 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import MovieEditor from "@/components/MovieEditor.vue";
 import MovieCard from "@/components/MovieCard.vue";
+import ModalComponent from "@/components/commons/ModalComponent.vue";
+import AngelExplorer from "@/components/file/AngelExplorer.vue";
 import { CREATE_MOVIE, UPDATE_MOVIE } from "@/store/constant";
 import {
   IMovie,
@@ -42,11 +46,14 @@ import { Getter } from "vuex-class";
 @Component({
   components: {
     MovieEditor,
-    MovieCard
+    MovieCard,
+    ModalComponent,
+    AngelExplorer
   }
 })
 export default class Creator extends Vue {
-  @Getter("genres") genres: Array<IGenre>;
+  @Getter("genres")
+  genres: Array<IGenre>;
 
   movie: Movie = new Movie();
   isEditing: boolean = false;
@@ -62,7 +69,7 @@ export default class Creator extends Vue {
   }
 
   create(): void {
-    this.$store.state.app.isLoading = true;
+    // this.$store.state.app.isLoading = true;
     let data = new MovieData({
       title: this.movie.title,
       description: this.movie.description,
@@ -73,7 +80,7 @@ export default class Creator extends Vue {
       image: this.movie.image
     });
     this.$store.dispatch(CREATE_MOVIE, data).then((envelope: MovieEnvelope) => {
-      this.$store.state.app.isLoading = false;
+      // this.$store.state.app.isLoading = false;
       this.$router.push({ name: "main-view" }); // TODO: navigate to view movie page
     });
   }
@@ -86,6 +93,10 @@ export default class Creator extends Vue {
         movie: data
       })
       .then(() => this.$router.push({ name: "main-view" }));
+  }
+
+  insertImg(content) {
+    this.$set(this.movie, "image", content.path);
   }
 }
 </script>

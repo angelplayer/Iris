@@ -9,7 +9,7 @@
       </div>
       <div class="ex-body">
         <ul class="file-list unstyled-list">
-          <li class="file-list-item" v-for="(item, index) in sortedFileItems" :key="index" :class="{'bg-light': selectedIndex == index}">
+          <li class="file-list-item"  v-for="(item, index) in sortedFileItems" :key="index"  :class="{'bg-fantasy': selectedIndex == index}"  >
             <!-- <label for="">
               <input type="checkbox"/>
             </label> -->
@@ -17,7 +17,7 @@
               <span class="file-icon"><i :class="fileType(item.type)"></i></span>
             </div>
             <div class="item file-item-meta">
-              <a @click="select(index)" @dblclick="open(item)" class="file-meta-name">
+              <a @dblclick="open(item)" @click="select(index)" class="file-meta-name">
                 <span>{{item.name}}</span>
               </a>
               <span>{{item.size}}</span>
@@ -29,10 +29,13 @@
           </li>
         </ul>
       </div>
-      <content-modal ref="previewer"/>
-      <rename-modal  @submit="submit" ref="renameModal"/>
-      <create-folder-modal @submit="submit" ref="createModal"/>
-      <upload-file-modal @submit="submit" ref="uploadModal"/>
+      <div class="ex-footer">
+        <button class="button btn-sm btn-primary" @click="pick()">Pick</button>
+      </div>
+        <content-modal ref="previewer"/>
+        <rename-modal  @submit="submit" ref="renameModal"/>
+        <create-folder-modal @submit="submit" ref="createModal"/>
+        <upload-file-modal @submit="submit" ref="uploadModal"/>
     </div>
 </template>
 
@@ -46,8 +49,8 @@
   width: 100%;
   height: 100%;
   border: 1px solid rgba(128, 128, 128, 0.1);
-  box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.301);
-  margin: 15px auto;
+  box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.1);
+  margin: 0 auto;
   font-family: "Roboto Mono";
 }
 .ex-header {
@@ -57,12 +60,22 @@
   padding-right: 15px;
   padding-left: 15px;
 }
+
+.ex-footer {
+  border-top: 1px solid rgba(128, 128, 128, 0.4);
+  height: 10%;
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .nav-action {
   margin-left: auto;
 }
 .ex-body {
   padding: 5px;
-  height: 90%;
+  height: 80%;
   width: 100%;
   border-top: 1px solid rgba(128, 128, 128, 0.1);
   overflow-y: scroll;
@@ -116,6 +129,10 @@
 }
 .file-icon {
   font-size: 30px;
+}
+.bg-fantasy,
+.bg-fantasy .file-list-item:hover {
+  background-color: rgba(73, 156, 234, 0.432) !important;
 }
 </style>
 <style>
@@ -177,11 +194,11 @@ export default class AngelExplorer extends Vue {
 
   currentPath: string = null;
 
+  selectedIndex = -1;
+
   modalComp: any = null;
 
   actionsButton: Array<{ name; handler; enable: boolean }> = [];
-
-  selectedIndex = null;
 
   constructor() {
     super();
@@ -207,6 +224,17 @@ export default class AngelExplorer extends Vue {
     });
   }
 
+  pick() {
+    let selectFile = this.fileItem[this.selectedIndex];
+    if ("file" === selectFile.type) {
+      let contentPath = `http://localhost:5000/api/file?action=download&path=${
+        this.currentPath
+      }/${selectFile.name}`;
+
+      this.$emit("onpick", { path: contentPath });
+    }
+  }
+
   select(index: number) {
     this.selectedIndex = this.selectedIndex != index ? index : -1;
   }
@@ -225,8 +253,9 @@ export default class AngelExplorer extends Vue {
         .then(path => (this.currentPath = path))
         .then(() => this.fetchFile(this.currentPath));
     } else if (file.type == "file") {
-      let source = this.currentPath + "/" + file.name;
-      (this.$refs.previewer as ContentModal).show(source);
+      (this.$refs.previewer as ContentModal).show(
+        this.currentPath + "/" + file.name
+      );
     }
   }
 
@@ -280,7 +309,7 @@ export default class AngelExplorer extends Vue {
   }
 
   fileType(type: string) {
-    return type == "dir" ? "fa fa-folder text-info" : "fa fa-file text-info";
+    return type == "dir" ? "fa fa-folder text-dark" : "fa fa-file text-dark";
   }
 
   fetchFile(path: string) {
