@@ -9,7 +9,7 @@
       </div>
       <div class="ex-body">
         <ul class="file-list unstyled-list">
-          <li class="file-list-item" v-for="(item, index) in sortedFileItems" :key="index" >
+          <li class="file-list-item" v-for="(item, index) in sortedFileItems" :key="index" :class="{'bg-light': selectedIndex == index}">
             <!-- <label for="">
               <input type="checkbox"/>
             </label> -->
@@ -17,7 +17,7 @@
               <span class="file-icon"><i :class="fileType(item.type)"></i></span>
             </div>
             <div class="item file-item-meta">
-              <a @dblclick="open(item)" class="file-meta-name">
+              <a @click="select(index)" @dblclick="open(item)" class="file-meta-name">
                 <span>{{item.name}}</span>
               </a>
               <span>{{item.size}}</span>
@@ -181,6 +181,8 @@ export default class AngelExplorer extends Vue {
 
   actionsButton: Array<{ name; handler; enable: boolean }> = [];
 
+  selectedIndex = null;
+
   constructor() {
     super();
     this.currentPath = this.basePath;
@@ -203,6 +205,10 @@ export default class AngelExplorer extends Vue {
     return this.fileItem.sort((a, b) => {
       return a.type == "dir" ? -1 : 1;
     });
+  }
+
+  select(index: number) {
+    this.selectedIndex = this.selectedIndex != index ? index : -1;
   }
 
   changeDirectory(directory) {

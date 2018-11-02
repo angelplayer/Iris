@@ -56,9 +56,10 @@
 }
 .ex-modal-body {
   padding: 0 0;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
   max-height: 600px;
+  max-width: 1000px;
   overflow: auto;
 }
 
