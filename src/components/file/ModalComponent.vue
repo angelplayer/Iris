@@ -38,7 +38,7 @@ import { Prop } from "vue-property-decorator";
 
 @Component
 export default class ModalComponent extends Vue {
-  @Prop({ required: true })
+  @Prop({ required: false })
   title: string;
 
   isShow: boolean = false;

@@ -58,6 +58,11 @@ export default class Creator extends Vue {
   movie: Movie = new Movie();
   isEditing: boolean = false;
 
+  constructor() {
+    super();
+    this.movie.genreList = [];
+  }
+
   created(): void {
     let id: string = this.$route.params.id;
     if (id) {
@@ -69,7 +74,7 @@ export default class Creator extends Vue {
   }
 
   create(): void {
-    // this.$store.state.app.isLoading = true;
+    this.$store.state.app.isLoading = true;
     let data = new MovieData({
       title: this.movie.title,
       description: this.movie.description,
@@ -80,7 +85,7 @@ export default class Creator extends Vue {
       image: this.movie.image
     });
     this.$store.dispatch(CREATE_MOVIE, data).then((envelope: MovieEnvelope) => {
-      // this.$store.state.app.isLoading = false;
+      this.$store.state.app.isLoading = false;
       this.$router.push({ name: "main-view" }); // TODO: navigate to view movie page
     });
   }
@@ -93,7 +98,6 @@ export default class Creator extends Vue {
       realeaseDate: this.movie.releaseDate,
       image: this.movie.image
     });
-    console.log(data);
     this.$store
       .dispatch(UPDATE_MOVIE, {
         id: this.movie.movieId,

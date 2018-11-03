@@ -32,10 +32,10 @@
       <div class="ex-footer">
         <button class="button btn-sm btn-primary" @click="pick()">Pick</button>
       </div>
-        <content-modal ref="previewer"/>
-        <rename-modal  @submit="submit" ref="renameModal"/>
-        <create-folder-modal @submit="submit" ref="createModal"/>
-        <upload-file-modal @submit="submit" ref="uploadModal"/>
+        <content-modal title="Preview" ref="previewer"/>
+        <rename-modal title="Rename"  @submit="submit" ref="renameModal"/>
+        <create-folder-modal title="New folder" @submit="submit" ref="createModal"/>
+        <upload-file-modal title="Upload" @submit="submit" ref="uploadModal"/>
     </div>
 </template>
 

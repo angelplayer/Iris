@@ -59,7 +59,7 @@ import ModalComponent from "@/components/commons/ModalComponent.vue";
 export default class MovieEditor extends Vue {
   @Getter("genres")
   genres: Array<IGenre>;
-  @Prop({ required: true })
+  @Prop({ required: false })
   movie: Movie;
 
   submit(): void {

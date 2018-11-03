@@ -4,7 +4,7 @@
     <div class="ex-modal-content">
       <div class="ex-modal-header">
         <span @click="hide()" class="close">&times;</span>
-        <h6 class="ex-modal-title">Preview</h6>
+        <h6 class="ex-modal-title">{{title}}</h6>
       </div>
       <div class="ex-modal-body">
         <img class="preview-img" :src="'http://localhost:5000/api/file?action=download&path=' + source" />
@@ -115,10 +115,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
+import ModalComponent from "@/components/file/ModalComponent.vue";
 
-@Component
-export default class ContentModal extends Vue {
-  source: string = '';
+@Component({
+  components: {
+    ModalComponent
+  }
+})
+export default class ContentModal extends ModalComponent {
+  source: string = "";
 
   isShow: boolean = false;
 

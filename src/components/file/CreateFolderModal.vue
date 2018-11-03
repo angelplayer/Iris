@@ -4,7 +4,7 @@
     <div class="ex-modal-content">
       <div class="ex-modal-header">
         <span @click="hide()" class="close">&times;</span>
-        <h6 class="ex-modal-title">New Folder</h6>
+        <h6 class="ex-modal-title">{{title}}</h6>
       </div>
       <div class="ex-modal-body">
         <input placeholder="Folder name" class="control" type="text" v-model="name"/>

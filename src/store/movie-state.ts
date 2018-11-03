@@ -27,7 +27,6 @@ export const actions: ActionTree<MoviesState, any> = {
     },
 
     [CREATE_MOVIE](store: ActionContext<MoviesState, any>, data: MovieData): Promise<MovieEnvelope> {
-        alert("call");
         return new MoviesService().create(new Command4({ movie: data }));
     },
 

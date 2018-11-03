@@ -4,7 +4,7 @@
     <div class="ex-modal-content">
       <div class="ex-modal-header">
         <span @click="hide()" class="close">&times;</span>
-        <h6 class="ex-modal-title">New Folder</h6>
+        <h6 class="ex-modal-title">{{title}}</h6>
       </div>
       <div class="ex-modal-body">
         <div class="file-list">
@@ -152,7 +152,6 @@ export default class UploadFileModal extends ModalComponent {
   max-height: 300px;
   overflow-y: auto;
 }
-
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
