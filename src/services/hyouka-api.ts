@@ -29,7 +29,7 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
         let url_ = this.baseUrl + "/api/movies/{movieId}/episodes";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
-        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId)); 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -52,14 +52,14 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? EpisodesEvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? EpisodesEvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<EpisodesEvelope | null>(<any>null);
@@ -69,7 +69,7 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
         let url_ = this.baseUrl + "/api/movies/{movieId}/episodes";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
-        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId)); 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(command);
@@ -78,7 +78,7 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -96,14 +96,14 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? EpisodeEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? EpisodeEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<EpisodeEnvelope | null>(<any>null);
@@ -113,10 +113,10 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
         let url_ = this.baseUrl + "/api/movies/{movieId}/episodes/{id}";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
-        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId)); 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -139,14 +139,14 @@ export class EpisodesService extends BaseClass implements IEpisodesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? Unit.fromJS(resultData200, _mappings) : new Unit();
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? Unit.fromJS(resultData200, _mappings) : new Unit();
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<Unit>(<any>null);
@@ -179,7 +179,7 @@ export class UserService extends BaseClass implements IUserService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -197,14 +197,14 @@ export class UserService extends BaseClass implements IUserService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? UserEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? UserEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<UserEnvelope | null>(<any>null);
@@ -220,7 +220,7 @@ export class UserService extends BaseClass implements IUserService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -238,14 +238,14 @@ export class UserService extends BaseClass implements IUserService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? UserEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? UserEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<UserEnvelope | null>(<any>null);
@@ -274,7 +274,7 @@ export class MoviesService extends BaseClass implements IMoviesService {
     get(tag?: string | null | undefined): Promise<MoviesEnvelope | null> {
         let url_ = this.baseUrl + "/api/movies?";
         if (tag !== undefined)
-            url_ += "tag=" + encodeURIComponent("" + tag) + "&";
+            url_ += "tag=" + encodeURIComponent("" + tag) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -297,14 +297,14 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? MoviesEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? MoviesEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<MoviesEnvelope | null>(<any>null);
@@ -320,7 +320,7 @@ export class MoviesService extends BaseClass implements IMoviesService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -338,14 +338,14 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? MovieEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? MovieEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<MovieEnvelope | null>(<any>null);
@@ -355,7 +355,7 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let url_ = this.baseUrl + "/api/movies/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -378,14 +378,14 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? MovieEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? MovieEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<MovieEnvelope | null>(<any>null);
@@ -395,7 +395,7 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let url_ = this.baseUrl + "/api/movies/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(command);
@@ -404,7 +404,7 @@ export class MoviesService extends BaseClass implements IMoviesService {
             body: content_,
             method: "PUT",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -422,14 +422,14 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? MovieEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? MovieEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<MovieEnvelope | null>(<any>null);
@@ -439,7 +439,7 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let url_ = this.baseUrl + "/api/movies/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -462,14 +462,14 @@ export class MoviesService extends BaseClass implements IMoviesService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? Unit.fromJS(resultData200, _mappings) : new Unit();
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? Unit.fromJS(resultData200, _mappings) : new Unit();
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<Unit>(<any>null);
@@ -516,14 +516,14 @@ export class GenresService extends BaseClass implements IGenresService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? GenresEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GenresEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<GenresEnvelope | null>(<any>null);
@@ -539,7 +539,7 @@ export class GenresService extends BaseClass implements IGenresService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -557,14 +557,14 @@ export class GenresService extends BaseClass implements IGenresService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? GenreEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GenreEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<GenreEnvelope | null>(<any>null);
@@ -593,9 +593,9 @@ export class FileService extends BaseClass implements IFileService {
     download(action?: string | null | undefined, path?: string | null | undefined): Promise<FileResponse | null> {
         let url_ = this.baseUrl + "/api/file?";
         if (action !== undefined)
-            url_ += "action=" + encodeURIComponent("" + action) + "&";
+            url_ += "action=" + encodeURIComponent("" + action) + "&"; 
         if (path !== undefined)
-            url_ += "path=" + encodeURIComponent("" + path) + "&";
+            url_ += "path=" + encodeURIComponent("" + path) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -622,7 +622,7 @@ export class FileService extends BaseClass implements IFileService {
             return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<FileResponse | null>(<any>null);
@@ -638,7 +638,7 @@ export class FileService extends BaseClass implements IFileService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -656,14 +656,14 @@ export class FileService extends BaseClass implements IFileService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? FileResultEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FileResultEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<FileResultEnvelope | null>(<any>null);
@@ -679,7 +679,7 @@ export class FileService extends BaseClass implements IFileService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -697,14 +697,14 @@ export class FileService extends BaseClass implements IFileService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? ActionResultEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ActionResultEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<ActionResultEnvelope | null>(<any>null);
@@ -720,7 +720,7 @@ export class FileService extends BaseClass implements IFileService {
             body: content_,
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             }
         };
@@ -738,14 +738,14 @@ export class FileService extends BaseClass implements IFileService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? ContentEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ContentEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<ContentEnvelope | null>(<any>null);
@@ -754,12 +754,12 @@ export class FileService extends BaseClass implements IFileService {
     upload(destination?: string | null | undefined, files?: FileParameter[] | null | undefined): Promise<ActionResultEnvelope | null> {
         let url_ = this.baseUrl + "/api/file/upload?";
         if (destination !== undefined)
-            url_ += "Destination=" + encodeURIComponent("" + destination) + "&";
+            url_ += "Destination=" + encodeURIComponent("" + destination) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = new FormData();
         if (files !== null && files !== undefined)
-            files.forEach(item_ => content_.append("Files", item_.data, item_.fileName ? item_.fileName : "Files"));
+            files.forEach(item_ => content_.append("Files", item_.data, item_.fileName ? item_.fileName : "Files") );
 
         let options_ = <RequestInit>{
             body: content_,
@@ -782,14 +782,14 @@ export class FileService extends BaseClass implements IFileService {
         let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             return response.text().then((_responseText) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 ? ActionResultEnvelope.fromJS(resultData200, _mappings) : <any>null;
-                return result200;
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ActionResultEnvelope.fromJS(resultData200, _mappings) : <any>null;
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
         return Promise.resolve<ActionResultEnvelope | null>(<any>null);
@@ -833,7 +833,7 @@ export class EpisodesEvelope implements IEpisodesEvelope {
                 data["episodes"].push(item.toJSON());
         }
         data["count"] = this.count !== undefined ? this.count : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -883,7 +883,7 @@ export class Episode implements IEpisode {
         data["file"] = this.file !== undefined ? this.file : <any>null;
         data["movieId"] = this.movieId !== undefined ? this.movieId : <any>null;
         data["movie"] = this.movie ? this.movie.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -901,7 +901,7 @@ export class Movie implements IMovie {
     title?: string | null;
     description?: string | null;
     image?: string | null;
-    releaseDate!: Date;
+    releaseDate!: string;
     genreList?: string[] | null;
     episodeCount!: number;
 
@@ -920,7 +920,7 @@ export class Movie implements IMovie {
             this.title = data["title"] !== undefined ? data["title"] : <any>null;
             this.description = data["description"] !== undefined ? data["description"] : <any>null;
             this.image = data["image"] !== undefined ? data["image"] : <any>null;
-            this.releaseDate = data["releaseDate"] ? new Date(data["releaseDate"].toString()) : <any>null;
+            this.releaseDate = data["releaseDate"] !== undefined ? data["releaseDate"] : <any>null;
             if (data["genreList"] && data["genreList"].constructor === Array) {
                 this.genreList = [];
                 for (let item of data["genreList"])
@@ -941,14 +941,14 @@ export class Movie implements IMovie {
         data["title"] = this.title !== undefined ? this.title : <any>null;
         data["description"] = this.description !== undefined ? this.description : <any>null;
         data["image"] = this.image !== undefined ? this.image : <any>null;
-        data["releaseDate"] = this.releaseDate ? this.releaseDate.toISOString() : <any>null;
+        data["releaseDate"] = this.releaseDate !== undefined ? this.releaseDate : <any>null;
         if (this.genreList && this.genreList.constructor === Array) {
             data["genreList"] = [];
             for (let item of this.genreList)
                 data["genreList"].push(item);
         }
         data["episodeCount"] = this.episodeCount !== undefined ? this.episodeCount : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -957,7 +957,7 @@ export interface IMovie {
     title?: string | null;
     description?: string | null;
     image?: string | null;
-    releaseDate: Date;
+    releaseDate: string;
     genreList?: string[] | null;
     episodeCount: number;
 }
@@ -988,7 +988,7 @@ export class EpisodeEnvelope implements IEpisodeEnvelope {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["episode"] = this.episode ? this.episode.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1025,7 +1025,7 @@ export class Command implements ICommand {
         data = typeof data === 'object' ? data : {};
         data["episode"] = this.episode ? this.episode.toJSON() : <any>null;
         data["movieId"] = this.movieId !== undefined ? this.movieId : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1066,7 +1066,7 @@ export class EpisodeData implements IEpisodeData {
         data["name"] = this.name !== undefined ? this.name : <any>null;
         data["number"] = this.number !== undefined ? this.number : <any>null;
         data["file"] = this.file !== undefined ? this.file : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1099,7 +1099,7 @@ export class Unit implements IUnit {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        return data;
+        return data; 
     }
 }
 
@@ -1132,7 +1132,7 @@ export class UserEnvelope implements IUserEnvelope {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["user"] = this.user ? this.user.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1175,7 +1175,7 @@ export class User implements IUser {
         data["email"] = this.email !== undefined ? this.email : <any>null;
         data["img"] = this.img !== undefined ? this.img : <any>null;
         data["token"] = this.token !== undefined ? this.token : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1212,7 +1212,7 @@ export class Command2 implements ICommand2 {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["user"] = this.user ? this.user.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1249,7 +1249,7 @@ export class LoginData implements ILoginData {
         data = typeof data === 'object' ? data : {};
         data["username"] = this.username !== undefined ? this.username : <any>null;
         data["password"] = this.password !== undefined ? this.password : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1284,7 +1284,7 @@ export class Command3 implements ICommand3 {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["user"] = this.user ? this.user.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1324,7 +1324,7 @@ export class UserData implements IUserData {
         data["username"] = this.username !== undefined ? this.username : <any>null;
         data["email"] = this.email !== undefined ? this.email : <any>null;
         data["password"] = this.password !== undefined ? this.password : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1371,7 +1371,7 @@ export class MoviesEnvelope implements IMoviesEnvelope {
                 data["movies"].push(item.toJSON());
         }
         data["count"] = this.count !== undefined ? this.count : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1406,7 +1406,7 @@ export class MovieEnvelope implements IMovieEnvelope {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["movie"] = this.movie ? this.movie.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1440,7 +1440,7 @@ export class Command4 implements ICommand4 {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["movie"] = this.movie ? this.movie.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1451,7 +1451,7 @@ export interface ICommand4 {
 export class MovieData implements IMovieData {
     title?: string | null;
     description?: string | null;
-    realeaseDate!: Date;
+    realeaseDate!: string;
     genreList?: number[] | null;
     image?: string | null;
 
@@ -1468,7 +1468,7 @@ export class MovieData implements IMovieData {
         if (data) {
             this.title = data["title"] !== undefined ? data["title"] : <any>null;
             this.description = data["description"] !== undefined ? data["description"] : <any>null;
-            this.realeaseDate = data["realeaseDate"] ? new Date(data["realeaseDate"].toString()) : <any>null;
+            this.realeaseDate = data["realeaseDate"] !== undefined ? data["realeaseDate"] : <any>null;
             if (data["genreList"] && data["genreList"].constructor === Array) {
                 this.genreList = [];
                 for (let item of data["genreList"])
@@ -1487,21 +1487,21 @@ export class MovieData implements IMovieData {
         data = typeof data === 'object' ? data : {};
         data["title"] = this.title !== undefined ? this.title : <any>null;
         data["description"] = this.description !== undefined ? this.description : <any>null;
-        data["realeaseDate"] = this.realeaseDate ? this.realeaseDate.toISOString() : <any>null;
+        data["realeaseDate"] = this.realeaseDate !== undefined ? this.realeaseDate : <any>null;
         if (this.genreList && this.genreList.constructor === Array) {
             data["genreList"] = [];
             for (let item of this.genreList)
                 data["genreList"].push(item);
         }
         data["image"] = this.image !== undefined ? this.image : <any>null;
-        return data;
+        return data; 
     }
 }
 
 export interface IMovieData {
     title?: string | null;
     description?: string | null;
-    realeaseDate: Date;
+    realeaseDate: string;
     genreList?: number[] | null;
     image?: string | null;
 }
@@ -1535,7 +1535,7 @@ export class Command5 implements ICommand5 {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id !== undefined ? this.id : <any>null;
         data["movie"] = this.movie ? this.movie.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1548,7 +1548,7 @@ export class MovieData2 implements IMovieData2 {
     title?: string | null;
     description?: string | null;
     image?: string | null;
-    realeaseDate!: Date;
+    realeaseDate!: string;
 
     constructor(data?: IMovieData2) {
         if (data) {
@@ -1564,7 +1564,7 @@ export class MovieData2 implements IMovieData2 {
             this.title = data["title"] !== undefined ? data["title"] : <any>null;
             this.description = data["description"] !== undefined ? data["description"] : <any>null;
             this.image = data["image"] !== undefined ? data["image"] : <any>null;
-            this.realeaseDate = data["realeaseDate"] ? new Date(data["realeaseDate"].toString()) : <any>null;
+            this.realeaseDate = data["realeaseDate"] !== undefined ? data["realeaseDate"] : <any>null;
         }
     }
 
@@ -1578,8 +1578,8 @@ export class MovieData2 implements IMovieData2 {
         data["title"] = this.title !== undefined ? this.title : <any>null;
         data["description"] = this.description !== undefined ? this.description : <any>null;
         data["image"] = this.image !== undefined ? this.image : <any>null;
-        data["realeaseDate"] = this.realeaseDate ? this.realeaseDate.toISOString() : <any>null;
-        return data;
+        data["realeaseDate"] = this.realeaseDate !== undefined ? this.realeaseDate : <any>null;
+        return data; 
     }
 }
 
@@ -1587,7 +1587,7 @@ export interface IMovieData2 {
     title?: string | null;
     description?: string | null;
     image?: string | null;
-    realeaseDate: Date;
+    realeaseDate: string;
 }
 
 export class GenresEnvelope implements IGenresEnvelope {
@@ -1624,7 +1624,7 @@ export class GenresEnvelope implements IGenresEnvelope {
             for (let item of this.genre)
                 data["genre"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 }
 
@@ -1661,7 +1661,7 @@ export class Genre implements IGenre {
         data = typeof data === 'object' ? data : {};
         data["genreId"] = this.genreId !== undefined ? this.genreId : <any>null;
         data["name"] = this.name !== undefined ? this.name : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1696,7 +1696,7 @@ export class GenreEnvelope implements IGenreEnvelope {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["genre"] = this.genre ? this.genre.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1730,7 +1730,7 @@ export class Command6 implements ICommand6 {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name !== undefined ? this.name : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1772,7 +1772,7 @@ export class FileResultEnvelope implements IFileResultEnvelope {
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 }
 
@@ -1818,7 +1818,7 @@ export class FileData implements IFileData {
         data["size"] = this.size !== undefined ? this.size : <any>null;
         data["date"] = this.date !== undefined ? this.date : <any>null;
         data["type"] = this.type !== undefined ? this.type : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1879,7 +1879,7 @@ export class ActionCommand implements IActionCommand {
             for (let item of this.items)
                 data["items"].push(item);
         }
-        return data;
+        return data; 
     }
 }
 
@@ -1918,7 +1918,7 @@ export class ActionResultEnvelope implements IActionResultEnvelope {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["result"] = this.result ? this.result.toJSON() : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1955,7 +1955,7 @@ export class FileActionResult implements IFileActionResult {
         data = typeof data === 'object' ? data : {};
         data["success"] = this.success !== undefined ? this.success : <any>null;
         data["error"] = this.error !== undefined ? this.error : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -1990,7 +1990,7 @@ export class ContentEnvelope implements IContentEnvelope {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["result"] = this.result !== undefined ? this.result : <any>null;
-        return data;
+        return data; 
     }
 }
 
@@ -2006,7 +2006,7 @@ function jsonParse(json: any, reviver?: any) {
     json = (function recurse(obj: any, prop?: any, parent?: any) {
         if (typeof obj !== 'object' || !obj)
             return obj;
-
+        
         if ("$ref" in obj) {
             let ref = obj.$ref;
             if (ref in byid)
@@ -2020,7 +2020,7 @@ function jsonParse(json: any, reviver?: any) {
                 obj = obj.$values;
             byid[id] = obj;
         }
-
+        
         if (Array.isArray(obj)) {
             obj = obj.map((v, i) => recurse(v, i, obj));
         } else {
@@ -2070,10 +2070,10 @@ export interface FileResponse {
 
 export class SwaggerException extends Error {
     message: string;
-    status: number;
-    response: string;
+    status: number; 
+    response: string; 
     headers: { [key: string]: any; };
-    result: any;
+    result: any; 
 
     constructor(message: string, status: number, response: string, headers: { [key: string]: any; }, result: any) {
         super();

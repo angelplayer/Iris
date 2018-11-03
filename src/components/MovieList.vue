@@ -45,7 +45,8 @@ import { EventEmitter } from "events";
 
 @Component({})
 export default class MovieList extends Vue {
-  @Prop() list: Array<IMovie>;
+  @Prop()
+  list: Array<IMovie>;
 
   selectedInex: number = -1;
 

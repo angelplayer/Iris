@@ -5,9 +5,9 @@
 			<app-header></app-header>
 		</div>
 			<app-sidebar :links="navs"></app-sidebar>
-      <!-- <transition duration="300" enter-active-class="animated zoomIn" mode="out-in" leave-active-class="animated fadeOutRightBig"> -->
+      <transition duration="300" enter-active-class="animated jakeInBox" mode="out-in" >
       <router-view></router-view>	
-      <!-- </transition> -->
+      </transition>
 	</div>
 </template>
 

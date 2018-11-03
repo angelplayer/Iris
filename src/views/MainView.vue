@@ -6,16 +6,10 @@
                 <div class="row">
                     <div class="col-md-7 col-sm-8">
                         <movie-list :list="movies"  @selected="onSelected" @edit="edit" @remove="remove"></movie-list>
-                        <div class="row">
-                          <div class="col-md-6">
-                          </div>
-                          <div class="col-md-6">
-                            <uploader v-if="selectedMovie" :movie-id="selectedMovie.movieId"></uploader>
-                          </div>
-                        </div>
+                        <uploader v-if="selectedMovie" :movie-id="selectedMovie.movieId"></uploader>
                     </div>
                       <div class="col-md-5 col-sm-4">
-                         <movie-card v-if="selectedMovie" :movie="selectedMovie"></movie-card>
+                        <movie-card v-if="selectedMovie" :movie="selectedMovie"></movie-card>
                         <episode-list v-if="selectedMovie" :list="episodes"></episode-list>
                     </div>
                 </div>

@@ -86,7 +86,14 @@ export default class Creator extends Vue {
   }
 
   edit(): void {
-    let data = new MovieData2(this.movie.toJSON());
+    console.log(this.movie.releaseDate);
+    let data = new MovieData2({
+      title: this.movie.title,
+      description: this.movie.description,
+      realeaseDate: this.movie.releaseDate,
+      image: this.movie.image
+    });
+    console.log(data);
     this.$store
       .dispatch(UPDATE_MOVIE, {
         id: this.movie.movieId,
