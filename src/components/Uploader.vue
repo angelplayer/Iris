@@ -27,7 +27,7 @@
         </div>
        </div>
        <modal-component ref="explorer" vWidth="1000" vHeight="500">
-          <angel-explorer @onpick="onpickFile"/>
+          <angel-explorer pickable="true" @onpick="onpickFile"/>
         </modal-component>
     </div>
 </template>

@@ -42,9 +42,9 @@ export default class Dashboard extends Vue {
     super();
     this.navs = [
       { url: "/admin", name: "Dashboard", icon: "la la-dashboard" },
-      { url: "/admin/create", name: "create", icon: "la la-edit" },
-      { url: "/admin/genre", name: "genre", icon: "la la-group" },
-      { url: "/admin/file", name: "file", icon: "la la-gear" }
+      { url: "/admin/create", name: "Creator", icon: "la la-edit" },
+      { url: "/admin/genre", name: "Genre", icon: "la la-group" },
+      { url: "/admin/file", name: "File Manager", icon: "la la-gear" }
     ];
   }
 

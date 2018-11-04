@@ -29,7 +29,7 @@
           </li>
         </ul>
       </div>
-      <div class="ex-footer">
+      <div v-if="pickable" class="ex-footer">
         <button class="button btn-sm btn-primary" @click="pick()">Pick</button>
       </div>
         <content-modal title="Preview" ref="previewer"/>
@@ -175,6 +175,7 @@ import Breadcrum from "@/components/file/Breadcrum.vue";
 import DirectoryNavigator from "@/types/Navigator.ts";
 import RenameModal from "@/components/file/RenameModal.vue";
 import ElipseButton from "@/components/file/ElipseButton.vue";
+import { Prop } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -187,6 +188,9 @@ import ElipseButton from "@/components/file/ElipseButton.vue";
   }
 })
 export default class AngelExplorer extends Vue {
+  @Prop({ required: false, default: false })
+  pickable: boolean;
+
   basePath = "/";
   dropdown = false;
   fileItem: Array<IFileData>;
