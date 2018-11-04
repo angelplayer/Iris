@@ -8,6 +8,7 @@ import MainView from '@/views/MainView.vue'
 import Creator from '@/views/Creator.vue'
 import FileView from '@/views/FileView.vue'
 import Breadcrum from '@/components/file/Breadcrum.vue'
+import WatchView from '@/views/WatchView.vue'
 
 Vue.use(Router);
 
@@ -62,6 +63,11 @@ export default new Router({
           path: 'file',
           name: 'file',
           component: FileView
+        },
+        {
+          path: 'watch/:m',
+          name: 'watch',
+          component: WatchView
         }
       ]
     }

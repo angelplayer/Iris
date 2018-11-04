@@ -66,6 +66,7 @@ export default class Uploader extends Vue {
   }
 
   upload(): void {
+    this.$store.state.app.isLoading = true;
     this.$store
       .dispatch(CREATE_EPISODE, {
         episode: this.newEpisode,
@@ -73,6 +74,7 @@ export default class Uploader extends Vue {
       })
       .then(() => {
         this.newEpisode.init({});
+        this.$store.state.app.isLoading = false;
       });
   }
 

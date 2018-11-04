@@ -49,7 +49,10 @@ export default class Dashboard extends Vue {
   }
 
   mounted() {
-    this.$store.dispatch(FETCH_GENRES, null, { root: true });
+    this.$store.state.app.isLoading = true;
+    this.$store
+      .dispatch(FETCH_GENRES, null, { root: true })
+      .then(() => (this.$store.state.app.isLoading = false));
   }
 
   toggleNavbar(): void {
