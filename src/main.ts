@@ -12,6 +12,18 @@ Vue.filter('formatDate', (value) => {
 
 Vue.config.productionTip = false;
 
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(route => route.meta.authorized)) {
+    if (!store.state.authenticated) {
+      router.push({});
+    } else {
+
+    }
+  }
+  next();
+});
+
 new Vue({
   render: (h) => h(App),
   router,

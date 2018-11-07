@@ -16,6 +16,7 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    { path: '*', redirect: '/' },
     {
       path: '/',
       name: 'home',
@@ -37,7 +38,7 @@ export default new Router({
     {
       path: '/user',
       name: 'user',
-      component: Auth
+      component: Auth,
     },
     {
       path: '/admin',
@@ -73,3 +74,4 @@ export default new Router({
     }
   ],
 });
+

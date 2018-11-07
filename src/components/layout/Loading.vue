@@ -2,20 +2,21 @@
     <div class="x-block text-center" :style="{display: loading? 'block': 'none'}">
         <div class="center">
             <i class="la la-circle-o-notch spin"></i>
-            <h5 class="my-4">Loading ...</h5>
+            <h5 class="my-4 text-muted">Loading ...</h5>
         </div>
     </div>
 </template>
 
 <style scoped>
 .x-block {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 1);
+  z-index: 1500;
 }
 
 .center {
@@ -74,7 +75,8 @@ import { Prop } from "vue-property-decorator";
 
 @Component
 export default class Loading extends Vue {
-  @Prop() loading: boolean;
+  @Prop()
+  loading: boolean;
 }
 </script>
 

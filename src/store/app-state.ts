@@ -2,10 +2,12 @@ import { AppState } from '@/types/state'
 import { ActionTree, MutationTree, GetterTree, ActionContext, Module } from 'vuex'
 import { User, UserService, Command2, ILoginData, Command3, Genre, Command6, GenresEnvelope, GenresService, } from '@/services/hyouka-api';
 import { LOGIN, REGISTER, FETCH_GENRES, ADD_GENRE } from '@/store/constant'
+import JwtService from '@/services/jwt.service';
 
 
 export const state: AppState = {
   user: {},
+  authenticated: !!JwtService.getToken(),
   error: false,
   genres: [],
   isLoading: false
@@ -25,6 +27,7 @@ export const mutations: MutationTree<AppState> = {
   storeUser(state, payload: User) {
     state.error = false;
     state.user = payload;
+    JwtService.setToken(payload.token);
   },
   storeGenre(state, payload: Array<Genre>) {
     state.genres = payload;
@@ -34,6 +37,7 @@ export const mutations: MutationTree<AppState> = {
 export const actions: ActionTree<AppState, any> = {
 
   [LOGIN](store: ActionContext<AppState, any>, data: Command2): any {
+    JwtService.destroyToken();
     new UserService().login(data).then((envelope) => {
       store.commit('storeUser', envelope.user);
     }).catch((e) => console.log(e));
