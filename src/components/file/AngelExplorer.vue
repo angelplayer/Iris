@@ -29,10 +29,13 @@
           </li>
         </ul>
       </div>
-      <content-modal ref="previewer"/>
-      <rename-modal  @submit="submit" ref="renameModal"/>
-      <create-folder-modal @submit="submit" ref="createModal"/>
-      <upload-file-modal @submit="submit" ref="uploadModal"/>
+      <div v-if="pickable" class="ex-footer">
+        <button class="button btn-sm btn-primary" @click="pick()">Pick</button>
+      </div>
+        <content-modal title="Preview" ref="previewer"/>
+        <rename-modal title="Rename"  @submit="submit" ref="renameModal"/>
+        <create-folder-modal title="New folder" @submit="submit" ref="createModal"/>
+        <upload-file-modal title="Upload" @submit="submit" ref="uploadModal"/>
     </div>
 </template>
 
@@ -46,8 +49,8 @@
   width: 100%;
   height: 100%;
   border: 1px solid rgba(128, 128, 128, 0.1);
-  box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.301);
-  margin: 15px auto;
+  box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.1);
+  margin: 0 auto;
   font-family: "Roboto Mono";
 }
 .ex-header {
@@ -57,12 +60,22 @@
   padding-right: 15px;
   padding-left: 15px;
 }
+
+.ex-footer {
+  border-top: 1px solid rgba(128, 128, 128, 0.4);
+  height: 10%;
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .nav-action {
   margin-left: auto;
 }
 .ex-body {
   padding: 5px;
-  height: 90%;
+  height: 80%;
   width: 100%;
   border-top: 1px solid rgba(128, 128, 128, 0.1);
   overflow-y: scroll;
@@ -162,6 +175,7 @@ import Breadcrum from "@/components/file/Breadcrum.vue";
 import DirectoryNavigator from "@/types/Navigator.ts";
 import RenameModal from "@/components/file/RenameModal.vue";
 import ElipseButton from "@/components/file/ElipseButton.vue";
+import { Prop } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -174,6 +188,9 @@ import ElipseButton from "@/components/file/ElipseButton.vue";
   }
 })
 export default class AngelExplorer extends Vue {
+  @Prop({ required: false, default: false })
+  pickable: boolean;
+
   basePath = "/";
   dropdown = false;
   fileItem: Array<IFileData>;
@@ -205,14 +222,25 @@ export default class AngelExplorer extends Vue {
     this.fetchFile(this.currentPath);
   }
 
-  select(index) {
-    this.selectedIndex = this.selectedIndex != index ? index : -1;
-  }
-
   get sortedFileItems() {
     return this.fileItem.sort((a, b) => {
       return a.type == "dir" ? -1 : 1;
     });
+  }
+
+  pick() {
+    let selectFile = this.fileItem[this.selectedIndex];
+    if ("file" === selectFile.type) {
+      let contentPath = `http://localhost:5000/api/file?action=download&path=${
+        this.currentPath
+      }/${selectFile.name}`;
+
+      this.$emit("onpick", { path: contentPath });
+    }
+  }
+
+  select(index: number) {
+    this.selectedIndex = this.selectedIndex != index ? index : -1;
   }
 
   changeDirectory(directory) {

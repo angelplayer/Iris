@@ -4,7 +4,7 @@
     <div class="ex-modal-content">
       <div class="ex-modal-header">
         <span @click="hide()" class="close">&times;</span>
-        <h6 class="ex-modal-title">Rename</h6>
+        <h6 class="ex-modal-title">{{title}}</h6>
       </div>
       <div class="ex-modal-body">
         <input class="control" type="text" v-model="itemName"/>
@@ -28,8 +28,8 @@ import { FileService, ActionCommand } from "@/services/hyouka-api";
 
 @Component
 export default class RenameModal extends ModalComponent {
-  oldName: string;
-  itemName: string;
+  oldName: string = "";
+  itemName: string = "";
   currentPath = null;
 
   constructor() {

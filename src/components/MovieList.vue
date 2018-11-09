@@ -5,7 +5,7 @@
     <p class="card-category">Recent movie</p>
 </div>
 <div class="card-body">
-    <table class="table table-head-bg-info table-striped table-hover">
+    <table class="table table-head-bg-primary table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" class="touch" :class="{'bg-success': selectedRow == index}">
+            <tr v-for="(item, index) in movies" :key="index" @click="selected(index)" class="touch" :class="{'bg-selected': selectedRow == index}">
                 <td>{{item.movieId}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.episodeCount}}</td>
@@ -45,7 +45,8 @@ import { EventEmitter } from "events";
 
 @Component({})
 export default class MovieList extends Vue {
-  @Prop() list: Array<IMovie>;
+  @Prop()
+  list: Array<IMovie>;
 
   selectedInex: number = -1;
 
@@ -79,6 +80,11 @@ export default class MovieList extends Vue {
 <style scoped>
 .touch {
   cursor: pointer;
+}
+
+.bg-selected {
+  background-color: rgb(48, 160, 154) !important;
+  color: white;
 }
 </style>
 

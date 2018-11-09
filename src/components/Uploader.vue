@@ -26,6 +26,9 @@
           <button @click="upload()" class="btn btn-primary "><i></i>Upload</button>
         </div>
        </div>
+       <modal-component ref="explorer" vWidth="1000" vHeight="500">
+          <angel-explorer pickable="true" @onpick="onpickFile"/>
+        </modal-component>
     </div>
 </template>
 
@@ -36,8 +39,15 @@ import Component from "vue-class-component";
 import { EpisodeData } from "@/services/hyouka-api";
 import { CREATE_EPISODE } from "@/store/constant";
 import { Prop } from "vue-property-decorator";
+import ModalComponent from "@/components/commons/ModalComponent.vue";
+import AngelExplorer from "@/components/file/AngelExplorer.vue";
 
-@Component
+@Component({
+  components: {
+    AngelExplorer,
+    ModalComponent
+  }
+})
 export default class Uploader extends Vue {
   newEpisode: EpisodeData = new EpisodeData({ file: "", name: "" });
 
@@ -45,10 +55,18 @@ export default class Uploader extends Vue {
   movieId: number;
 
   chooseFile(): void {
-    this.newEpisode.file = "abc.mp4";
+    let explorer = this.$refs.explorer as ModalComponent;
+    explorer.show();
+  }
+
+  onpickFile(content) {
+    this.newEpisode.file = content.path;
+    let explorer = this.$refs.explorer as ModalComponent;
+    explorer.hide();
   }
 
   upload(): void {
+    this.$store.state.app.isLoading = true;
     this.$store
       .dispatch(CREATE_EPISODE, {
         episode: this.newEpisode,
@@ -56,6 +74,7 @@ export default class Uploader extends Vue {
       })
       .then(() => {
         this.newEpisode.init({});
+        this.$store.state.app.isLoading = false;
       });
   }
 

@@ -2,10 +2,14 @@ import { IUser, IGenre, IEpisode } from '@/services/hyouka-api'
 import { IMovie } from '@/services/hyouka-api'
 
 export interface AppState {
-    user?: IUser,
     error: boolean,
     genres: Array<IGenre>,
     isLoading: boolean
+}
+
+export interface AuthState {
+    user: IUser,
+    isAuthenticated: boolean,
 }
 
 export interface MoviesState {

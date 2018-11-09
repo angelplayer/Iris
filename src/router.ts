@@ -8,6 +8,7 @@ import MainView from '@/views/MainView.vue'
 import Creator from '@/views/Creator.vue'
 import FileView from '@/views/FileView.vue'
 import Breadcrum from '@/components/file/Breadcrum.vue'
+import WatchView from '@/views/WatchView.vue'
 
 Vue.use(Router);
 
@@ -15,6 +16,7 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    { path: '*', redirect: '/' },
     {
       path: '/',
       name: 'home',
@@ -34,14 +36,15 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/user',
-      name: 'user',
-      component: Auth
+      path: '/auth',
+      name: 'auth',
+      component: Auth,
     },
     {
       path: '/admin',
       name: 'dashboard',
       component: Dashboard,
+      meta: { authorized: true },
       children: [
         {
           path: '',
@@ -62,8 +65,14 @@ export default new Router({
           path: 'file',
           name: 'file',
           component: FileView
+        },
+        {
+          path: 'watch/:m',
+          name: 'watch',
+          component: WatchView
         }
       ]
     }
   ],
 });
+
