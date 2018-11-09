@@ -36,14 +36,15 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/user',
-      name: 'user',
+      path: '/auth',
+      name: 'auth',
       component: Auth,
     },
     {
       path: '/admin',
       name: 'dashboard',
       component: Dashboard,
+      meta: { authorized: true },
       children: [
         {
           path: '',

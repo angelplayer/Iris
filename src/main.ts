@@ -15,10 +15,10 @@ Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(route => route.meta.authorized)) {
-    if (!store.state.authenticated) {
-      router.push({});
+    if (!store.getters.logined) {
+      router.push({ name: 'auth' });
     } else {
-
+      next();
     }
   }
   next();

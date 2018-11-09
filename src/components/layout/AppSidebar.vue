@@ -8,7 +8,7 @@
                 <div class="info">
                     <a @click.prevent="toggleShow()" class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            {{username}}
+                            {{account}}
                             <span class="user-level">Administrator</span>
                             <span class="caret"></span>
                         </span>
@@ -56,11 +56,15 @@ import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { Ilink } from "@/types/layout.ts";
 import { Getter } from "vuex-class";
+import { IUser } from "@/services/hyouka-api";
 
 @Component
 export default class AppSidebar extends Vue {
   @Prop({ required: false })
   links?: Array<Ilink>;
+
+  @Getter("account")
+  account: string;
 
   isProfileShow: boolean = false;
 
