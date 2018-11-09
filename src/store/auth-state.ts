@@ -1,8 +1,8 @@
 import { AuthState } from '@/types/state';
 import { GetterTree, MutationTree, ActionTree, Module, ActionContext } from 'vuex';
 import JwtService from '@/services/jwt.service';
-import { LOGIN, LOADING, SET_AUTH, SET_ERROR } from './constant';
-import { UserService, IUserData, LoginData, ILoginData, Command2, ICommand2, IUser } from '@/services/hyouka-api';
+import { LOGIN, LOADING, SET_AUTH, PURGE_AUTH, LOGOUT } from './constant';
+import { UserService, Command2, IUser } from '@/services/hyouka-api';
 
 
 
@@ -22,6 +22,12 @@ export const mutations: MutationTree<AuthState> = {
         state.isAuthenticated = true;
         state.user = payload;
         JwtService.setToken(payload.token);
+    },
+
+    [PURGE_AUTH](state: AuthState) {
+        state.isAuthenticated = false;
+        state.user = null;
+        JwtService.destroyToken();
     }
 }
 
@@ -37,6 +43,15 @@ export const actions: ActionTree<AuthState, any> = {
                 reject(e);
             }).finally(() => context.commit(LOADING, false))
         });
+    },
+
+    [LOGOUT](context: ActionContext<AuthState, any>) {
+        return new Promise((resolve) => {
+            context.commit(LOADING, true, { root: true });
+            context.commit(PURGE_AUTH);
+            context.commit(LOADING, false, { root: true })
+            resolve();
+        })
     }
 }
 

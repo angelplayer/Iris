@@ -32,6 +32,11 @@
                                     <span class="link-collapse">Settings</span>
                                 </a>
                             </li>
+                             <li>
+                                <a @click.prevent="logout()" href="#logout">
+                                    <span class="link-collapse">Logout</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -57,6 +62,7 @@ import { Prop } from "vue-property-decorator";
 import { Ilink } from "@/types/layout.ts";
 import { Getter } from "vuex-class";
 import { IUser } from "@/services/hyouka-api";
+import { LOGOUT } from "@/store/constant";
 
 @Component
 export default class AppSidebar extends Vue {
@@ -70,6 +76,12 @@ export default class AppSidebar extends Vue {
 
   toggleShow(): void {
     this.isProfileShow = !this.isProfileShow;
+  }
+
+  logout(): void {
+    this.$store
+      .dispatch(LOGOUT)
+      .then(() => this.$router.push({ name: "home" }));
   }
 }
 </script>
